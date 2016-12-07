@@ -55,13 +55,6 @@
             // Anime the mouth
             tween_mouth_down(mouth);
 
-            //  Enable if for physics. This creates a default rectangular body.
-	        //game.physics.p2.enable(eye_left);
-
-            //  Modify a few body properties
-            //eye_left.body.setZeroDamping();
-           // eye_left.body.fixedRotation = true;
-
             cursors = game.input.keyboard.createCursorKeys();
         }
 
@@ -117,15 +110,7 @@
             }, this);
         }
 
-        function animeEye(obj, angle){
-            obj.angle += angle;
-        }
-    
-        function animeMouth(obj, x){
-            obj.x += x;
-        }
-
-        function changeFrame(obj, frame){
+        function updateFrame(obj, frame){
             obj.frameName = frame;
         }
 
@@ -135,26 +120,18 @@
 
             if (cursors.left.isDown)
             {
-                changeFrame(eye_right, "eye_r1_c1.png");
-               //animeEye(eye_left, -1);
-               //animeEye(eye_right, -1);
-               //animeMouth(mouth, 1);
-               //game.add.tween(eye).to( { angle: eye.angle - 1 }, 2000, Phaser.Easing.Linear.None, true);
-                //eye.body.moveLeft(400);
+                //  Volta para olho aberto
+                updateFrame(eye_right, "eye_r1_c1.png");
             }
             else if (cursors.right.isDown)
             {
-                changeFrame(eye_right, "eye_r1_c2.png");
-                // eye.body.moveRight(400);
-                //animeEye(eye_left, 1);
-                //animeEye(eye_right, 1);
-                //animeMouth(mouth, 1);
-                //game.add.tween(eye).to( { angle: eye.angle + 1 }, 2000, Phaser.Easing.Linear.None, true);
+                //  Piscar um olho
+                updateFrame(eye_right, "eye_r1_c2.png");
             }
 
             if (cursors.up.isDown)
             {
-                //eye.body.moveUp(400);
+                // eye_right.body.moveUp(400);
                 
             }
             else if (cursors.down.isDown)
