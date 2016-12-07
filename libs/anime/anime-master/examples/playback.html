@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>anime.js</title>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="img/favicon.png" />
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+<link href="css/styles.css" rel="stylesheet">
+</head>
+<style>
+
+  fieldset {
+    margin-bottom: 1rem;
+  }
+
+  .progress {
+    width: 82%;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  div {
+    width: 2rem;
+    height: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    mix-blend-mode: lighten;
+  }
+
+</style>
+</head>
+<body>
+  <section>
+    <article>
+      <div class="blue"></div>
+      <div class="green"></div>
+      <div class="red"></div>
+    </article>
+    <input class="progress" type="range" value="0" min="0" max="100"></input>
+    <fieldset>
+      <button class="play">Play</button>
+      <button class="pause">Pause</button>
+      <button class="restart">Restart</button>
+      <input class="percents" type="text"></input>
+    </fieldset>
+  </section>
+  <script src="../anime.js"></script>
+  <script>
+
+    var playButton = document.querySelector('.play');
+    var pauseButton = document.querySelector('.pause');
+    var restartButton = document.querySelector('.restart');
+    var progress = document.querySelector('.progress');
+    var percents = document.querySelector('.percents');
+
+    var myAnimation = anime({
+      targets: 'div',
+      translateX: function() { return anime.random(10, 14) + 'rem'; },
+      scale: function() { return anime.random(10,20) / 10; },
+      rotate: function() { return anime.random(-360,360); },
+      duration: function() { return anime.random(800,1400); },
+      easing: 'easeOutQuad',
+      update: function(animation) {
+        progress.value = animation.progress;
+        percents.value = Math.round(animation.progress) + '%';
+      }
+    });
+
+    playButton.addEventListener('click', function() { myAnimation.play(); });
+    pauseButton.addEventListener('click', function() { myAnimation.pause(); });
+    restartButton.addEventListener('click', function() { myAnimation.restart(); });
+    progress.addEventListener('input', function() { myAnimation.seek(progress.value); });
+
+
+  </script>
+</body>
+</html>

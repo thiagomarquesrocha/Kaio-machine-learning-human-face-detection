@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>anime.js</title>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="img/favicon.png" />
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+<link href="css/styles.css" rel="stylesheet">
+</head>
+  <section>
+    <audio controls autoplay src="sounds/Myon-Neutrino.m4a"></audio>
+  </section>
+  <script src="../anime.js"></script>
+  <script>
+
+    var audio = document.querySelector('audio');
+
+    var volume = anime({
+      targets: audio,
+      volume: [1, 0],
+      duration: 1920,
+      easing: 'linear',
+      direction: 'alternate',
+      loop: true
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>anime.js</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<style>
+
+  article {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  div {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  div.disabled {
+    background: #FFF;
+  }
+
+</style>
+</head>
+<body>
+  <section>
+    <article>
+      <div class="blue"></div>
+      <div class="red"></div>
+      <div class="green"></div>
+    </article>
+  </section>
+  <script src="../anime.js"></script>
+  <script>
+
+  var animation = anime({
+    targets: 'div',
+    translateX: function() { return anime.random(-6, 6) + 'rem'; },
+    translateY: function() { return anime.random(-6, 6) + 'rem'; },
+    scale: function() { return anime.random(10, 20) / 10; },
+    rotate: function() { return anime.random(-360, 360); },
+    delay: function() { return 400 + anime.random(0, 500); },
+    duration: function() { return anime.random(1000, 2000); },
+    direction: 'alternate',
+    loop: true
+  });
+
+  document.onmousemove = function(e) {
+    if (e.target.matches('div')) {
+      anime.remove(e.target);
+      e.target.classList.add('disabled');
+    }
+  }
+
+  </script>
+</body>
+</html>

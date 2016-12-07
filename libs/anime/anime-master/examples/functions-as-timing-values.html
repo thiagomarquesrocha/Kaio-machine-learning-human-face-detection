@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>anime.js</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<style>
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 5rem;
+    background-color: #FF324A;
+  }
+
+  div {
+    width: 4rem;
+    height: 4rem;
+    margin: auto;
+    background: #FFF;
+  }
+
+  .begin {
+    background-color: #FFFF99;
+  }
+
+  .update div {
+    background-color: #206EFF;
+  }
+
+  .complete div {
+    background-color: #31FFA6;
+  }
+
+</style>
+</head>
+<body>
+  <section>
+    <div></div>
+    <div></div>
+    <div></div>
+  </section>
+  <script src="../anime.js"></script>
+  <script>
+
+  var sectionEl = document.querySelector('section');
+
+  function delayFunc() {
+    console.log('BEGIN');
+    sectionEl.classList.add('begin');
+  }
+
+  function updateFunc() {
+    console.log('UPDATE');
+    sectionEl.classList.add('update');
+  }
+
+  function completeFunc() {
+    console.log('COMPLETE');
+    sectionEl.classList.add('complete');
+  }
+
+  anime({
+    targets: 'div',
+    translateY: 100,
+    scale: 1.5,
+    rotate: {
+      value: 360,
+      duration: function(el, i) { return 2000 + (i * 500) },
+      delay: function(el, i) { return 2000 + (i * 500) },
+      easing: 'easeOutQuad',
+    },
+    delay: function(el, i) { return 1000 + (i * 500); },
+    duration: function(el, i) { return 1000 + (i * 500); },
+    begin: delayFunc,
+    update: updateFunc,
+    complete: completeFunc
+  });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+<html>
+<head>
+    <style>
+        .green{ background: green }
+        .blue{ background: blue }
+        div {
+            width: 2rem;
+            height: 2rem;
+            margin-top: auto;
+            margin-bottom: auto;
+            }
+    </style>
+    <script src="anime.min.js"></script>
+</head>
+<body>
+<section>
+  <article class="green">
+    <div class="blue"></div>
+  </article>
+  <footer>
+    <span>Made with</span> <a href="http://anime-js.com">anime.js</a>
+  </footer>
+</section>
+
+    <script>
+        anime({
+            targets: '.blue',
+            translateX: '13rem',
+            rotate: {
+                value: 180,
+                duration: 1500,
+                easing: 'easeInOutQuad'
+            },
+            scale: {
+                value: 2,
+                delay: 150,
+                duration: 850,
+                easing: 'easeInOutExpo',
+            },
+            loop: true,
+            direction: 'alternate'
+        });
+    </script>
+</body>
+</html>

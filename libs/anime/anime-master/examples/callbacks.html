@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>anime.js</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <section>
+    <article>
+      <div class="blue"></div>
+      <div class="red"></div>
+      <div class="green"></div>
+    </article>
+  </section>
+  <script src="../anime.js"></script>
+  <script>
+
+  var blueAnimation = anime({
+    targets: '.blue',
+    translateX: 200,
+    direction: 'alternate',
+    autoplay: false
+  });
+
+  var redAnimation = anime({
+    targets: '.red',
+    translateX: 200,
+    direction: 'alternate',
+    autoplay: false
+  });
+
+  var greenAnimation = anime({
+    targets: '.green',
+    translateX: 200,
+    direction: 'alternate',
+    autoplay: false
+  });
+
+  blueAnimation.settings.complete = function() {
+    greenAnimation.restart();
+  }
+
+  redAnimation.settings.complete = function() {
+    blueAnimation.restart();
+  }
+
+  greenAnimation.settings.complete = function() {
+    redAnimation.restart();
+  }
+
+  greenAnimation.play();
+
+  </script>
+</body>
+</html>

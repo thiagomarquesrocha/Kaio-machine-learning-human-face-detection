@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>anime.js</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<style>
+
+  body {
+    overflow: hidden;
+  }
+
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin: -1rem 0 0 -1rem;
+    background: #FFF;
+    transform: scale(0);
+    border-radius: 50%;
+  }
+
+</style>
+</head>
+<body>
+  <script src="../anime.js"></script>
+  <script>
+
+  var maxElements = 200;
+  var duration = 7000;
+  var toAnimate = [];
+  var w = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+  var colors = ['#FF324A', '#31FFA6', '#206EFF', '#FFFF99'];
+
+  var createElements = (function() {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < maxElements; i++) {
+      var el = document.createElement('div');
+      el.style.background = colors[anime.random(0, 3)];
+      el.style.transform = 'rotate('+anime.random(-360, 360)+'deg)';
+      toAnimate.push(el);
+      fragment.appendChild(el);
+    }
+    document.body.appendChild(fragment);
+  })();
+
+  var animate = function(el) {
+    anime({
+      targets: el,
+      rotate: anime.getValue(el,'rotate'),
+      translateX: [0, w/2],
+      translateY: [0, w/2],
+      scale: [0, 2],
+      delay: anime.random(0, duration),
+      duration: duration,
+      easing: "easeInCubic",
+      loop: true
+    });
+  }
+
+  toAnimate.forEach(animate);
+
+  </script>
+</body>
+</html>
