@@ -3,7 +3,7 @@
 <head>
     <script src="js/phaser.min.js"></script>
     <style>
-            body{ margin: 0 }
+            body{ margin: 0; overflow: hidden }
     </style>
 </head>
 <body>
@@ -47,18 +47,18 @@
            //  This sprite is using a texture atlas for all of its animation data
            //  This creates a simple sprite that is using our loaded image and
             //  displays it on-screen and assign it to a variable
-            eye_left = creteEye('eye_r1_c1.png', -200, -100);
-            eye_right = creteEye('eye_r1_c1.png', 100, -100);
+            eye_left = create_eye('eye_r1_c1.png', -250, -180);
+            eye_right = create_eye('eye_r1_c1.png', 150, -180);
 
             // Create mouth
-            mouth = game.add.sprite(game.world.centerX - 280, game.world.centerY + 80, "mouth");
+            mouth = game.add.sprite(game.world.centerX - 280, game.world.centerY + 50, "mouth");
             // Anime the mouth
             tween_mouth_down(mouth);
 
             cursors = game.input.keyboard.createCursorKeys();
         }
 
-        function creteEye(key, x, y){
+        function create_eye(key, x, y){
             //var eye = game.add.sprite(game.world.centerX + x, game.world.centerY + y, key);
 
             var eye = game.add.sprite(game.world.centerX + x, game.world.centerY + y, "eye_scene", key);
