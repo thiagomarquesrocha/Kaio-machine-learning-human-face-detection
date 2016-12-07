@@ -2,6 +2,7 @@
 <html>
 <head>
     <script src="js/phaser.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
     <style>
             body{ margin: 0; overflow: hidden }
     </style>
@@ -10,7 +11,42 @@
     <div id="game"></div>
     <script>
         var debug = true;
+        
+        var smile = {
+            left : true,
+            right : true
+        };
+
+         // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB5X93N893-TFOLO-9kWknTuiEDha5tGhI",
+            authDomain: "face-teste.firebaseapp.com",
+            databaseURL: "https://face-teste.firebaseio.com",
+            storageBucket: "face-teste.appspot.com",
+            messagingSenderId: "147065873940"
+        };
+        firebase.initializeApp(config);
+
+        // Get a reference to the database service
+        var database = firebase.database();
+
         var game = new Phaser.Game(screen.width, screen.height, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update : update });
+
+        var face = database.ref('face');
+        face.on('value', function(snapshot) {
+            console.log(snapshot.val());
+            var detection =  snapshot.val();
+
+            var right = parseFloat(detection.olho_direito.replace(',', '.'));
+
+            if(right < 0.5 && right > 0){
+                updateFrame(eye_right, "eye_r1_c2.png");
+            }else{
+                updateFrame(eye_right, "eye_r1_c1.png");
+            }
+
+            console.log(right);
+        });
 
         function preload() {
 
@@ -47,13 +83,25 @@
            //  This sprite is using a texture atlas for all of its animation data
            //  This creates a simple sprite that is using our loaded image and
             //  displays it on-screen and assign it to a variable
-            eye_left = create_eye('eye_r1_c1.png', -250, -180);
-            eye_right = create_eye('eye_r1_c1.png', 150, -180);
+            eye_left = create_eye('eye_r1_c1.png', -200, -180);
+            eye_right = create_eye('eye_r1_c1.png', 200, -180);
 
             // Create mouth
-            mouth = game.add.sprite(game.world.centerX - 280, game.world.centerY + 50, "mouth");
+            mouth = game.add.sprite(game.world.centerX, game.world.centerY + 50, "mouth");
+
+            mouth.anchor.setTo(0.6);
+
+            mouth.tween = {
+                left : {
+                    x : "0"
+                },
+                right : {
+                    x : "0"
+                }
+            };
+
             // Anime the mouth
-            tween_mouth_down(mouth);
+            tween_mouth_on(mouth);
 
             cursors = game.input.keyboard.createCursorKeys();
         }
@@ -71,32 +119,44 @@
             eye.position.x -= halfWidthEye;
             eye.position.y -= halfHeightEye;
 
+            eye.anchor.setTo(0.5);
+
+            eye.tween = {
+                up : {
+                    y : eye.y - 20
+                },
+                down : {
+                    y : eye.y + 20
+                }
+            };
+
             tween_eye_down(eye);
 
             return eye;
         }
 
 
-        function tween_mouth_down(mouth){
+        function tween_mouth_on(mouth){
             //console.log("Animando");
-            var tween = game.add.tween(mouth).to( { y: mouth.y + 5 }, 1000, Phaser.Easing.In, true);
+            var tween = game.add.tween(mouth).to( { y: mouth.y + 5, x : mouth.tween.left.x }, 1000, Phaser.Easing.In, true);
             tween.onComplete.addOnce(function(){
-                tween_mouth_up(mouth);
+                tween_mouth_off(mouth);
             }, this);
         }
 
-        function tween_mouth_up(mouth){
+        function tween_mouth_off(mouth){
             //console.log("Finalizado");
-            var tween = game.add.tween(mouth).to( { y: mouth.y - 5 }, 1000, Phaser.Easing.In, true);
+            var tween = game.add.tween(mouth).to( { y: mouth.y - 5, x : mouth.tween.right.x }, 1000, Phaser.Easing.In, true);
             tween.onComplete.addOnce(function(){
-                tween_mouth_down(mouth);
+                tween_mouth_on(mouth);
             }, this);
         }
 
 
         function tween_eye_down(eye){
             //console.log("Animando");
-            var tween = game.add.tween(eye).to( { y: eye.y + 20 }, 1000, Phaser.Easing.In, true);
+            var tween = game.add.tween(eye).to( { y: eye.tween.down.y }, 1000, Phaser.Easing.In, true);
+            eye.tween.self = tween;
             tween.onComplete.addOnce(function(){
                 tween_eye_up(eye);
             }, this);
@@ -104,13 +164,15 @@
 
         function tween_eye_up(eye){
             //console.log("Finalizado");
-            var tween = game.add.tween(eye).to( { y: eye.y - 20 }, 1000, Phaser.Easing.In, true);
+            var tween = game.add.tween(eye).to( { y: eye.tween.up.y }, 1000, Phaser.Easing.In, true);
+            eye.tween.self = tween;
             tween.onComplete.addOnce(function(){
                 tween_eye_down(eye);
             }, this);
         }
 
         function updateFrame(obj, frame){
+            //if(true) return;
             obj.frameName = frame;
         }
 
@@ -118,15 +180,47 @@
 
             //eye.body.setZeroVelocity();
 
-            if (cursors.left.isDown)
+            // eye_left.tween.down.y = eye_left.y + 20;
+            // eye_left.tween.up.y = eye_left.y - 20;
+            // eye_right.tween.down.y = eye_right.y + 20;
+            // eye_right.tween.up.y = eye_right.y - 20;
+
+            if (cursors.left.isDown && smile.left)
             {
+                smile.left = false;
+                smile.right = true;
+
                 //  Volta para olho aberto
                 updateFrame(eye_right, "eye_r1_c1.png");
+
+                // eye_left.rotation -= 0.05;
+                // eye_right.rotation -= 0.05;
+
+                // mouth.rotation -= 0.01;
+                // mouth.x += 10;
             }
-            else if (cursors.right.isDown)
+            else if (cursors.right.isDown && smile.right)
             {
+                smile.right = false;
+                smile.left = true;
+
                 //  Piscar um olho
                 updateFrame(eye_right, "eye_r1_c2.png");
+
+                // eye_left.rotation += 0.05;
+                // eye_right.rotation += 0.25;
+
+                // eye_right.tween.down.y += 80;
+                // eye_right.tween.up.y += 60;
+                
+                // mouth.tween.left.x -= 50;
+
+                // tween_eye_down(eye_right);
+
+                // eye_right.tween.self.pause();
+
+                // mouth.rotation += 0.25;
+                // mouth.x -= 50;
             }
 
             if (cursors.up.isDown)
