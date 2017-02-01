@@ -72,6 +72,17 @@ var body = (function(){
         return new_mouth;
     }
 
+    function smile(value){
+        if( typeof value == 'string' )
+            value = parseFloat(value.replace(',', '.'));
+        
+        if(value < 0.2 && value > 0){
+            body.sad();
+        }else if(value > 0.2){
+            body.happy();
+        }
+    }
+
     function blink(what_eye, value){
 
         if( typeof value == 'string' )
@@ -89,7 +100,7 @@ var body = (function(){
 
         if(value < 0.5 && value > 0) 
             updateFrame(eye_selected, eye_selected.frames.end);
-        else{
+        else if(value > 0.5){
             updateFrame(eye_selected, eye_selected.frames.begin);   
         }
 
@@ -113,7 +124,8 @@ var body = (function(){
         getMouth : getMouth,
         blink : blink,
         sad : sad,
-        happy : happy
+        happy : happy,
+        smile : smile
     }
 
 })();
@@ -182,16 +194,26 @@ function preload() {
         console.log('Conectado');
     });
 
-    socket.on('teste', function(data){
+    socket.on('disconnect', function(){
+        console.log('Desconectou');
+    });
+
+    socket.on('blink', function(data){
         console.log('Recebido ', data);
         var detection =  data;
         //console.log(detection);
 
          // Pisca o olho direito
-        body.blink('left', detection.olho_esquerdo);
+        body.blink('left', detection.left);
 
         // Pisca o olho direito
-        body.blink('right', detection.olho_direito);
+        body.blink('right', detection.right);
+    });
+
+    socket.on('smile', function(detection){
+        console.log(detection);
+
+        body.smile(detection.mouth);
     });
 
     //clearGameCache();
