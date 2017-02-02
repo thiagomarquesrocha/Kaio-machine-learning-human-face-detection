@@ -1,5 +1,7 @@
 var debug = true;
 
+var data = [];
+
 /** Objeto principal */
 var body = (function(){
     var _state = {
@@ -183,38 +185,53 @@ var tween = (function(){
     }
 })();
 
-var game = new Phaser.Game(screen.width, screen.height, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update : update });
+var server = (function(){
+    function bootstrap(){
+        var socket = io.connect('http://172.25.9.18:3000');
 
-function preload() {
+        socket.on('connect', function () {
+            //socket.emit('teste', 'hi!');
+            console.log('Conectado');
+        });
 
-    var socket = io.connect('http://172.25.9.18:3000');
+        socket.on('disconnect', function(){
+            console.log('Desconectou');
+        });
 
-    socket.on('connect', function () {
-        //socket.emit('teste', 'hi!');
-        console.log('Conectado');
-    });
+        socket.on('blink', blink);
 
-    socket.on('disconnect', function(){
-        console.log('Desconectou');
-    });
+        socket.on('smile', smile);
+    }
 
-    socket.on('blink', function(data){
+    function smile(detection){
+        console.log(detection);
+        
+        body.smile(detection.mouth);
+    }
+
+    function blink(data){
         console.log('Recebido ', data);
         var detection =  data;
         //console.log(detection);
 
-         // Pisca o olho direito
+        // Pisca o olho direito
         body.blink('left', detection.left);
 
         // Pisca o olho direito
         body.blink('right', detection.right);
-    });
+    }
 
-    socket.on('smile', function(detection){
-        console.log(detection);
+    return{
+        bootstrap : bootstrap
+    }
+})();
 
-        body.smile(detection.mouth);
-    });
+var game = new Phaser.Game(screen.width, screen.height, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update : update });
+
+function preload() {
+
+    // Inicia a conexao com o servidor
+    server.bootstrap();
 
     //clearGameCache();
     game.load.atlasJSONHash('eye_scene', 'assets/eyescene.png', 'js/eyescene.json');
@@ -277,16 +294,9 @@ function update(){
         body.blink('right', 0.1);
     }
 
-    if (cursors.up.isDown)
-    {
-        // eye_right.body.moveUp(400);
-
+    if (cursors.up.isDown){
         body.sad();
-        
-    }
-    else if (cursors.down.isDown)
-    {
-        //eye.body.moveDown(400);
-         body.happy();
+    }else if (cursors.down.isDown){
+        body.happy();
     }
 }
