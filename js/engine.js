@@ -224,28 +224,30 @@ var body = (function(){
         if(value < 0.5 && value > 0){
             updateFrame(eye_selected, eye_selected.frames.end);
             // Salva a ocorrencia de piscar o olho direito ou esquerdo
-            storage.add('blink_left', (what_eye == 'left')? 1 : 0);
-            storage.add('blink_right', (what_eye == 'right')? 1 : 0);
+            storage.add('blink_' + what_eye, 1);
+            //storage.add('blink_right', (what_eye == 'right')? 1 : 0);
         }else if(value > 0.5){ // Nao piscou
             updateFrame(eye_selected, eye_selected.frames.begin);
             // Salva a ocorrencia de piscar o olho direito ou esquerdo
-            storage.add('blink_left', (what_eye == 'left')? 0 : 1);
-            storage.add('blink_right', (what_eye == 'right')? 0 : 1);   
+            storage.add('blink_' + what_eye, 0);
+            //storage.add('blink_right', (what_eye == 'right')? 0 : 1);   
         }
 
         //console.log(value);
     }
 
-    function sad(){
+    function sad(value){
         _mouth.anchor.setTo(0.4);
         _mouth.angle = 180;
         storage.add('smile_or_not', 0);
+        storage.add('rate_smile_or_not', value);
     }
 
-    function happy(){
+    function happy(value){
         _mouth.anchor.setTo(0.6);
         _mouth.angle = 0;
         storage.add('smile_or_not', 1);
+        storage.add('rate_smile_or_not', value);
     }
     
     return{
@@ -420,6 +422,12 @@ function updateFrame(obj, frame){
     obj.frameName = frame;
 }
 
+function random(min, max){
+    min = Math.floor(min);
+    max = Math.floor(max);
+    return Math.random()*(max-min+1.0)+min;
+}
+
 function update(){
 
     // Inicia o processo de armazenamento de eventos
@@ -427,20 +435,20 @@ function update(){
 
     if (cursors.left.isDown){
         // Pisca olho esquerdo
-        body.blink('left', 1);
+        body.blink('left', random(0.5, 1));
         // Pisca o olho direito
-        body.blink('right', 1);
+        body.blink('right', random(0.5, 1));
     }else if (cursors.right.isDown){
         // Pisca olho esquerdo
-        body.blink('left', 0.1);
+        body.blink('left', random(0, 0.49));
         // Pisca o olho direito
-        body.blink('right', 0.1);
+        body.blink('right', random(0, 0.49));
     }
 
     if (cursors.up.isDown){
-        body.sad();
+        body.sad(random(0.2, 1));
     }else if (cursors.down.isDown){
-        body.happy();
+        body.happy(random(0, 0.19));
     }
 
     // Salva a nova ocorrencia de eventos

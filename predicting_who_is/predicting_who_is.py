@@ -12,9 +12,9 @@ def fit_and_predict(nome, modelo, treino_dados, treino_marcacoes):
     print msg
     return taxa_de_acerto
 
-def evaluate():
+def evaluate(X, Y):
 
-    X, Y = get_data()
+    # X, Y = get_data()
 
     porcentagem_de_treino = 0.8
 
@@ -67,10 +67,21 @@ def evaluate():
 
     resultados[resultadoAdaBoost] = modeloAdaBoost
 
+    from sklearn.svm import SVC, LinearSVC
+    modeloSVC = SVC(kernel='linear', C=1.0)
+    resultadoSVC = fit_and_predict('SVC', modeloSVC, treino_dados, treino_marcacoes)
+
+    resultados[resultadoSVC] = modeloSVC
+
+    modeloLinearSVC = LinearSVC(random_state=111)
+    resultadoLinearSVC = fit_and_predict('LinearSVC', modeloLinearSVC, treino_dados, treino_marcacoes)
+
+    resultados[resultadoLinearSVC] = modeloLinearSVC
+
     vencedor = resultados[max(resultados)]
 
-    #print "Vencedor:"
-    #print vencedor
+    print "Vencedor:"
+    print vencedor
 
     vencedor.fit(treino_dados, treino_marcacoes)
     resultado = vencedor.predict(validacao_dados)
