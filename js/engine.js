@@ -1,4 +1,5 @@
 var debug = true;
+var pause_test = false;
 var cursors;
 
 var storage = (function(){
@@ -70,6 +71,10 @@ var storage = (function(){
         _data.push(_new_data);
         // Incrementa o indice do ultimo salvo
         _index++;
+
+        if(_index > 199){
+            pause_test = true;
+        }
     }
 
     function save(){
@@ -192,12 +197,14 @@ var body = (function(){
         if( typeof value == 'string' )
             value = parseFloat(value.replace(',', '.'));
 
+        value = (value < 0)? 0 : value;
+
         storage.add('rate_smile_or_not', value);
         
-        if(value < 0.2 && value > 0){
-            body.sad();
-        }else if(value > 0.2){
-            body.happy();
+        if(value < 0.4 && value > 0){
+            body.sad(value);
+        }else if(value > 0.4){
+            body.happy(value);
         }
     }
 
@@ -207,6 +214,8 @@ var body = (function(){
             value = parseFloat(value.replace(',', '.'));
 
         var eye_selected = (what_eye != 'left')? _eye.right : _eye.left;
+
+        value = (value < 0)? 0 : value;
 
         if( what_eye == 'left' ){
             _state.blink.right = true;
@@ -323,15 +332,35 @@ var server = (function(){
         socket.on('connect', function () {
             //socket.emit('teste', 'hi!');
             console.log('Conectado');
+
+            socket.on('gesture', gesture);
         });
 
         socket.on('disconnect', function(){
             console.log('Desconectou');
         });
 
-        socket.on('blink', blink);
+        //socket.on('blink', blink);
 
-        socket.on('smile', smile);
+        //socket.on('smile', smile);
+    }
+
+    function gesture(data){
+
+        if(pause_test){
+            console.warn("Teste finalizado, confira o resultado!!!");
+            return;
+        }
+        
+
+        // Inicia o processo de armazenamento de eventos
+        storage.new_data();
+        
+        smile(data);
+        blink(data);
+
+        // Salva a nova ocorrencia de eventos
+        storage.save_new_data();
     }
 
     function smile(detection){
@@ -401,7 +430,7 @@ function create() {
 
     cursors = game.input.keyboard.createCursorKeys();
 
-     game.input.keyboard.onDownCallback = function() {
+    game.input.keyboard.onDownCallback = function() {
         //console.log(game.input.keyboard.event.keyCode);
         var code = game.input.keyboard.event.keyCode;
         switch(code){
@@ -414,7 +443,7 @@ function create() {
                 storage.read();
                 break;
         }       
-     };
+    };
 }
 
 function updateFrame(obj, frame){

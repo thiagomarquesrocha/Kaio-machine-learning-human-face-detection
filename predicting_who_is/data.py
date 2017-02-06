@@ -19,3 +19,12 @@ def get_full_data():
     Y = Y_df
     X = X_df
     return X, Y, df
+
+def get_who_is():
+    df = pd.read_csv('whois.csv')
+    Y_df = df['user']
+    X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not', 'blink_left', 'blink_right', 'smile_or_not']]
+
+    Y = Y_df
+    X = X_df
+    return X, Y, df
