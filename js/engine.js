@@ -135,43 +135,78 @@ var body = (function(){
     };
     var _mouth = {};
 
-    function bootstrap(){
-        //  This sprite is using a texture atlas for all of its animation data
-        //  This creates a simple sprite that is using our loaded image and
-        //  displays it on-screen and assign it to a variable
-        _eye.left = eye('eye_r1_c1.png', 'eye_r1_c2.png', -200, -180);
-        _eye.right = eye('eye_r1_c1.png', 'eye_r1_c2.png', 200, -180);
-        // Create mouth
-        _mouth = mouth();
-
-        sad();
+    function preload(){
+        //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
+        //  blank frames at the end, so we tell the loader how many to load
+        game.load.atlas('idle', 'assets/idle.png', 'js/idle.json');
+        game.load.image('blink_left', 'assets/blink_left.png');
+        game.load.image('blink_right', 'assets/blink_right.png');
+        game.load.image('blink', 'assets/blink.png');
     }
 
-    function eye(frame_begin, frame_end, x, y){
-        var new_eye = game.add.sprite(game.world.centerX + x, game.world.centerY + y, "eye_scene", frame_begin);
+    function bootstrap(){
+        var x = game.world.centerX - 78;
+        var y = game.world.centerY - 98;
+        var idle = create_state_animated('idle', x, y);
+        var blink = create_state_static('blink', x, y);
+        var blink_left = create_state_static('blink_left', x, y);
+        var blink_right = create_state_static('blink_right', x, y);
+        idle.show();
+        idle.play();
+    }
 
-        var halfWidthEye = new_eye.texture.width/2;
-        var halfHeightEye = new_eye.texture.height/2;
+    function play(action, name){
+        //  30 is the frame rate (30fps)
+        //  true means it will loop when it finishes
+        action.animations.play(name, 30, true);
+    }
 
-        new_eye.position.x -= halfWidthEye;
-        new_eye.position.y -= halfHeightEye;
-        new_eye.frames = {
-            begin : frame_begin,
-            end : frame_end
-        };
-
-        new_eye.anchor.setTo(0.5);
-
-        new_eye.tween = {
-            up : {
-                y : new_eye.y - 20
+    function create_state_static(state, x, y){
+        var obj = game.add.image(x, y, state);
+        _state[state] = {
+            "state" : obj,
+            "show" : function(){
+                obj.alpha = 1;
             },
-            down : {
-                y : new_eye.y + 20
+            "hide" : function(){
+                obj.alpha = 0;
             }
         };
 
-        return new_eye;
+        _state[state].hide();
+
+        if(debug)
+            console.log('Created '+state+' state');
+
+        return _state[state];
+    }
+
+    function create_state_animated(state, x, y){
+        var obj = game.add.sprite(x, y, state);
+        //  Here we add a new animation called 'state'
+        //  Because we didn't give any other parameters it's going to make an animation from all available frames in the state sprite sheet
+        var action = obj.animations.add(state);
+
+        _state[state] = {
+            "action" : action,
+            "state" : obj,
+            "play" : function(){
+                play(obj, state)
+            },
+            "show" : function(){
+                obj.alpha = 1;
+            },
+            "hide" : function(){
+                obj.alpha = 0;
+            }
+        };
+
+        _state[state].hide();
+
+        if(debug)
+            console.log('Created '+state+' state');
+
+        return _state[state];
     }
 
     function getMouth(){
@@ -213,36 +248,51 @@ var body = (function(){
         if( typeof value == 'string' )
             value = parseFloat(value.replace(',', '.'));
 
-        var eye_selected = (what_eye != 'left')? _eye.right : _eye.left;
-
-        value = (value < 0)? 0 : value;
+        value = (value < 0)? 1 : value;
 
         if( what_eye == 'left' ){
-            _state.blink.right = true;
-            _state.blink.left = false;
+            _state.blink.right = false;
+            _state.blink.left = true;
+
+            _state.idle.hide();
+            _state.blink_right.hide();
+            _state.blink_left.show();
+
+            // console.log('Piscando o olho esquerdo');
+
             // Salva a taxa em tempo real da probabilidade de olho esta piscando
             storage.add('rate_blink_left', value);
         }else{
-            _state.blink.right = false;
-            _state.blink.left = true;
+            _state.blink.right = true;
+            _state.blink.left = false;
+
+            _state.idle.hide();
+            _state.blink_left.hide();
+            _state.blink_right.show();
+
+            // console.log('Piscando o olho direito');
+
             // Salva a taxa em tempo real da probabilidade de olho esta piscando
             storage.add('rate_blink_right', value);
         }
 
         // Piscou o olho
         if(value < 0.5 && value > 0){
-            updateFrame(eye_selected, eye_selected.frames.end);
             // Salva a ocorrencia de piscar o olho direito ou esquerdo
             storage.add('blink_' + what_eye, 1);
-            //storage.add('blink_right', (what_eye == 'right')? 1 : 0);
         }else if(value > 0.5){ // Nao piscou
-            updateFrame(eye_selected, eye_selected.frames.begin);
             // Salva a ocorrencia de piscar o olho direito ou esquerdo
             storage.add('blink_' + what_eye, 0);
-            //storage.add('blink_right', (what_eye == 'right')? 0 : 1);   
         }
 
-        //console.log(value);
+        // setTimeout(function(){
+        //     _state.blink.hide();
+        //     _state.blink_left.hide();
+        //     _state.blink_right.hide();
+        //     _state.idle.show();
+        // }, 100);
+
+        //console.log(left);
     }
 
     function sad(value){
@@ -260,6 +310,7 @@ var body = (function(){
     }
     
     return{
+        preload : preload,
         bootstrap : bootstrap,
         state : _state,
         eye : _eye,
@@ -356,7 +407,7 @@ var server = (function(){
         // Inicia o processo de armazenamento de eventos
         storage.new_data();
         
-        smile(data);
+        //smile(data);
         blink(data);
 
         // Salva a nova ocorrencia de eventos
@@ -374,10 +425,8 @@ var server = (function(){
         var detection =  data;
         //console.log(detection);
 
-        // Pisca o olho direito
+        // Pisca o olho direito e esquerdo
         body.blink('left', detection.left);
-
-        // Pisca o olho direito
         body.blink('right', detection.right);
     }
 
@@ -391,14 +440,12 @@ function preload() {
     // Inicia a conexao com o servidor
     server.bootstrap();
 
+    // Preload body
+    body.preload();
+
     //clearGameCache();
-    game.load.atlasJSONHash('eye_scene', 'assets/eyescene.png', 'js/eyescene.json');
 
-    //  The second parameter is the URL of the image (relative)
-    game.load.image('eye', 'assets/eye.png');
-    game.load.image('mouth', 'assets/mouth.png');
-
-    game.stage.backgroundColor = "#FFFF00";
+    game.stage.backgroundColor = "#000000";
 }
 
 function clearGameCache () {
@@ -418,16 +465,6 @@ function create() {
     //  Make things a bit more bouncey
     game.physics.p2.defaultRestitution = 0.8;
 
-    // Inicia o objeto
-    body.bootstrap();
-
-    // Anima os olhos
-    tween.eye('left');
-    tween.eye('right');
-    
-    // Anime the mouth
-    tween.mouth();
-
     cursors = game.input.keyboard.createCursorKeys();
 
     game.input.keyboard.onDownCallback = function() {
@@ -444,6 +481,9 @@ function create() {
                 break;
         }       
     };
+
+    // Inicia o objeto
+    body.bootstrap();
 }
 
 function updateFrame(obj, frame){
@@ -458,13 +498,14 @@ function random(min, max){
 }
 
 function update(){
+    if(!cursors) return;
 
     // Inicia o processo de armazenamento de eventos
     storage.new_data();
 
     if (cursors.left.isDown){
         // Pisca olho esquerdo
-        body.blink('left', random(0.5, 1));
+       body.blink('left', random(0.5, 1));
         // Pisca o olho direito
         body.blink('right', random(0.5, 1));
     }else if (cursors.right.isDown){
@@ -475,7 +516,7 @@ function update(){
     }
 
     if (cursors.up.isDown){
-        body.sad(random(0.2, 1));
+        body.sad(random(0.4, 1));
     }else if (cursors.down.isDown){
         body.happy(random(0, 0.19));
     }

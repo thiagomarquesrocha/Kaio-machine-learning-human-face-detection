@@ -1,0 +1,340 @@
+{"frames": {
+
+"cópia de kaio-tiago-copiar-2_0039_Camada-1.png":
+{
+	"frame": {"x":1,"y":1,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0000_Camada-40.png":
+{
+	"frame": {"x":1,"y":185,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0001_Camada-39.png":
+{
+	"frame": {"x":1,"y":369,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0002_Camada-38.png":
+{
+	"frame": {"x":1,"y":553,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0003_Camada-37.png":
+{
+	"frame": {"x":1,"y":737,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0004_Camada-36.png":
+{
+	"frame": {"x":1,"y":921,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0005_Camada-35.png":
+{
+	"frame": {"x":1,"y":1105,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0006_Camada-34.png":
+{
+	"frame": {"x":1,"y":1289,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0007_Camada-33.png":
+{
+	"frame": {"x":1,"y":1473,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0008_Camada-32.png":
+{
+	"frame": {"x":1,"y":1657,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0009_Camada-31.png":
+{
+	"frame": {"x":1,"y":1841,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0010_Camada-30.png":
+{
+	"frame": {"x":195,"y":1,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0011_Camada-29.png":
+{
+	"frame": {"x":195,"y":185,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0012_Camada-28.png":
+{
+	"frame": {"x":195,"y":369,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0013_Camada-27.png":
+{
+	"frame": {"x":195,"y":553,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0014_Camada-26.png":
+{
+	"frame": {"x":195,"y":737,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0015_Camada-25.png":
+{
+	"frame": {"x":195,"y":921,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0016_Camada-24.png":
+{
+	"frame": {"x":195,"y":1105,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0017_Camada-23.png":
+{
+	"frame": {"x":195,"y":1289,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0018_Camada-22.png":
+{
+	"frame": {"x":195,"y":1473,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0019_Camada-21.png":
+{
+	"frame": {"x":195,"y":1657,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0020_Camada-20.png":
+{
+	"frame": {"x":195,"y":1841,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0021_Camada-19.png":
+{
+	"frame": {"x":389,"y":1,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0022_Camada-18.png":
+{
+	"frame": {"x":389,"y":185,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0023_Camada-17.png":
+{
+	"frame": {"x":389,"y":369,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0024_Camada-16.png":
+{
+	"frame": {"x":389,"y":553,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0025_Camada-15.png":
+{
+	"frame": {"x":389,"y":737,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0026_Camada-14.png":
+{
+	"frame": {"x":389,"y":921,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0027_Camada-13.png":
+{
+	"frame": {"x":389,"y":1105,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0028_Camada-12.png":
+{
+	"frame": {"x":389,"y":1289,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0029_Camada-11.png":
+{
+	"frame": {"x":389,"y":1473,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0030_Camada-10.png":
+{
+	"frame": {"x":389,"y":1657,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0031_Camada-9.png":
+{
+	"frame": {"x":389,"y":1841,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0032_Camada-8.png":
+{
+	"frame": {"x":583,"y":1,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0033_Camada-7.png":
+{
+	"frame": {"x":583,"y":185,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0034_Camada-6.png":
+{
+	"frame": {"x":583,"y":369,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0035_Camada-5.png":
+{
+	"frame": {"x":583,"y":553,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0036_Camada-4.png":
+{
+	"frame": {"x":583,"y":737,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0037_Camada-3.png":
+{
+	"frame": {"x":583,"y":921,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0038_Camada-2.png":
+{
+	"frame": {"x":583,"y":1105,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+},
+"kaio-tiago-copiar-2_0039_Camada-1.png":
+{
+	"frame": {"x":583,"y":1289,"w":192,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":182},
+	"sourceSize": {"w":192,"h":182}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "assets/idle.png",
+	"format": "RGBA8888",
+	"size": {"w":776,"h":2024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:28f30457cf73f2a02c7dbe95171d328e:637eb3a57142ecd17d7f4ab6aaef1f8b:585717d7804995c87573698b70e44cb4$"
+}
+}
