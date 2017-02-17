@@ -134,6 +134,8 @@ var body = (function(){
         right : null
     };
     var _mouth = {};
+    // Objeto de animacao para guardar o estado de normalizacao
+    var animation; 
 
     function preload(){
         //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
@@ -243,56 +245,95 @@ var body = (function(){
         }
     }
 
-    function blink(what_eye, value){
-
+    function normalize_value(value){
         if( typeof value == 'string' )
             value = parseFloat(value.replace(',', '.'));
 
         value = (value < 0)? 1 : value;
+        return value;    
+    }
 
-        if( what_eye == 'left' ){
+    function what_eye_blink(what_eye, left, right){
+        if(what_eye == 'both'){
+            _state.blink.right = true;
+            _state.blink.left = true;
+
+            clear_animation();
+            _state.idle.hide();
+            _state.blink.show();
+        }else if( what_eye == 'left' ){
             _state.blink.right = false;
             _state.blink.left = true;
 
+            clear_animation();
             _state.idle.hide();
-            _state.blink_right.hide();
             _state.blink_left.show();
 
             // console.log('Piscando o olho esquerdo');
-
-            // Salva a taxa em tempo real da probabilidade de olho esta piscando
-            storage.add('rate_blink_left', value);
         }else{
             _state.blink.right = true;
             _state.blink.left = false;
 
+            clear_animation();
             _state.idle.hide();
-            _state.blink_left.hide();
             _state.blink_right.show();
 
             // console.log('Piscando o olho direito');
-
-            // Salva a taxa em tempo real da probabilidade de olho esta piscando
-            storage.add('rate_blink_right', value);
         }
 
-        // Piscou o olho
-        if(value < 0.5 && value > 0){
-            // Salva a ocorrencia de piscar o olho direito ou esquerdo
-            storage.add('blink_' + what_eye, 1);
-        }else if(value > 0.5){ // Nao piscou
-            // Salva a ocorrencia de piscar o olho direito ou esquerdo
-            storage.add('blink_' + what_eye, 0);
+        // Salva a taxa em tempo real da probabilidade de olho esta piscando
+        storage.add('rate_blink_left', left);
+         // Salva a taxa em tempo real da probabilidade de olho esta piscando
+        storage.add('rate_blink_right', right);
+
+        return what_eye;
+    }
+
+    function blink(left, right){
+
+        left = normalize_value(left);
+        right = normalize_value(right);
+
+        var what_eye = '';
+
+        if(left < 0.5 && right < 0.5){ // Piscou os dois olhos
+            what_eye = what_eye_blink('both', left, right);
+        }else if(left < 0.5 && right >= 0.5){ // Piscou o olho esquerdo
+            what_eye = what_eye_blink('left', left, right);
+        }else if(right < 0.5 && left >= 0.5){ // Piscou o olho direito
+            what_eye = what_eye_blink('right', left, right);
+        }else{ // Os olhos permanecem abertos
+            what_eye = what_eye_blink('normal', left, right);
         }
 
-        // setTimeout(function(){
-        //     _state.blink.hide();
-        //     _state.blink_left.hide();
-        //     _state.blink_right.hide();
-        //     _state.idle.show();
-        // }, 100);
+        // Verifica qual foi o evento dos olhos
+        if(what_eye ==  'right'){
+            storage.add('blink_left', 0);
+            storage.add('blink_right', 1);
+        }else if(what_eye == 'left'){
+            storage.add('blink_left', 1);
+            storage.add('blink_right', 0);
+        }else if(what_eye ==  'both'){
+            storage.add('blink_left', 1);
+            storage.add('blink_right', 1);
+        }else{ // Normal 
+            storage.add('blink_left', 0);
+            storage.add('blink_right', 0);
+        }
+
+        if(animation != null)
+            clearTimeout(animation);
+
+        animation = setTimeout(clear_animation, 100);
 
         //console.log(left);
+    }
+
+    function clear_animation(){
+        _state.blink.hide();
+        _state.blink_left.hide();
+        _state.blink_right.hide();
+        _state.idle.show();
     }
 
     function sad(value){
@@ -378,6 +419,7 @@ var tween = (function(){
 
 var server = (function(){
     function bootstrap(){
+        if(true) return;
         var socket = io.connect('http://172.25.9.18:3000');
 
         socket.on('connect', function () {
@@ -426,8 +468,7 @@ var server = (function(){
         //console.log(detection);
 
         // Pisca o olho direito e esquerdo
-        body.blink('left', detection.left);
-        body.blink('right', detection.right);
+        body.blink(detection.left, detection.right);
     }
 
     return{
@@ -468,9 +509,13 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
     game.input.keyboard.onDownCallback = function() {
-        //console.log(game.input.keyboard.event.keyCode);
+        // console.log(game.input.keyboard.event.keyCode);
         var code = game.input.keyboard.event.keyCode;
         switch(code){
+            case 45 :
+                // Pisca olho esquerdo
+                body.blink(random(0, 0.49), random(0, 0.49));
+                break;
             case 13 : // Enter
                 // Salva todas as ocorrencias
                 storage.save();
@@ -492,9 +537,10 @@ function updateFrame(obj, frame){
 }
 
 function random(min, max){
-    min = Math.floor(min);
-    max = Math.floor(max);
-    return Math.random()*(max-min+1.0)+min;
+    min = parseFloat(min);
+    max = parseFloat(max);
+    // console.log(min, max);
+    return Math.random()*(max-min)+min;
 }
 
 function update(){
@@ -504,15 +550,11 @@ function update(){
     storage.new_data();
 
     if (cursors.left.isDown){
-        // Pisca olho esquerdo
-       body.blink('left', random(0.5, 1));
-        // Pisca o olho direito
-        body.blink('right', random(0.5, 1));
+       // Pisca olho esquerdo
+       body.blink(random(0, 0.49), random(0.5, 1));
     }else if (cursors.right.isDown){
-        // Pisca olho esquerdo
-        body.blink('left', random(0, 0.49));
-        // Pisca o olho direito
-        body.blink('right', random(0, 0.49));
+       // Pisca olho esquerdo
+       body.blink(random(0.5, 1), random(0, 0.49));
     }
 
     if (cursors.up.isDown){
