@@ -270,7 +270,7 @@ var body = (function(){
             _state.blink_left.show();
 
             // console.log('Piscando o olho esquerdo');
-        }else{
+        }else if( what_eye == 'right'){
             _state.blink.right = true;
             _state.blink.left = false;
 
@@ -293,6 +293,8 @@ var body = (function(){
 
         left = normalize_value(left);
         right = normalize_value(right);
+
+        console.log(left, right);
 
         var what_eye = '';
 
@@ -419,7 +421,7 @@ var tween = (function(){
 
 var server = (function(){
     function bootstrap(){
-        if(true) return;
+        //if(true) return;
         var socket = io.connect('http://172.25.9.18:3000');
 
         socket.on('connect', function () {
@@ -513,7 +515,7 @@ function create() {
         var code = game.input.keyboard.event.keyCode;
         switch(code){
             case 45 :
-                // Pisca olho esquerdo
+                // Pisca olho esquerdo e direito
                 body.blink(random(0, 0.49), random(0, 0.49));
                 break;
             case 13 : // Enter
