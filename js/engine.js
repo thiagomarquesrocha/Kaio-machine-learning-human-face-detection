@@ -1,6 +1,7 @@
 var debug = true;
 var pause_test = false;
 var cursors;
+var MAX_TEST = 200;
 
 var storage = (function(){
     var _data = [];
@@ -72,7 +73,7 @@ var storage = (function(){
         // Incrementa o indice do ultimo salvo
         _index++;
 
-        if(_index > 199){
+        if(_index > MAX_TEST){
             pause_test = true;
         }
     }
@@ -141,6 +142,8 @@ var body = (function(){
         //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
         //  blank frames at the end, so we tell the loader how many to load
         game.load.atlas('idle', 'assets/idle.png', 'js/idle.json');
+        game.load.atlas('smile', 'assets/smile.png', 'js/smile.json');
+        game.load.atlas('sad', 'assets/sad.png', 'js/sad.json');
         game.load.image('blink_left', 'assets/blink_left.png');
         game.load.image('blink_right', 'assets/blink_right.png');
         game.load.image('blink', 'assets/blink.png');
@@ -153,6 +156,14 @@ var body = (function(){
         var blink = create_state_static('blink', x, y);
         var blink_left = create_state_static('blink_left', x, y);
         var blink_right = create_state_static('blink_right', x, y);
+        var smile = create_state_animated('smile', x, y);
+        var sad = create_state_animated('sad', x, y);
+        smile.show();
+        smile.play();
+        smile.hide();
+        sad.show();
+        sad.play();
+        sad.hide();
         idle.show();
         idle.play();
     }
@@ -257,14 +268,12 @@ var body = (function(){
         if(what_eye == 'both'){
             _state.blink.right = true;
             _state.blink.left = true;
-
             clear_animation();
             _state.idle.hide();
             _state.blink.show();
         }else if( what_eye == 'left' ){
             _state.blink.right = false;
             _state.blink.left = true;
-
             clear_animation();
             _state.idle.hide();
             _state.blink_left.show();
@@ -273,7 +282,6 @@ var body = (function(){
         }else if( what_eye == 'right'){
             _state.blink.right = true;
             _state.blink.left = false;
-
             clear_animation();
             _state.idle.hide();
             _state.blink_right.show();
@@ -294,7 +302,7 @@ var body = (function(){
         left = normalize_value(left);
         right = normalize_value(right);
 
-        console.log(left, right);
+        //console.log(left, right);
 
         var what_eye = '';
 
@@ -323,33 +331,57 @@ var body = (function(){
             storage.add('blink_right', 0);
         }
 
+        has_animation();
+
+        //console.log(left);
+    }
+
+    function has_animation(){
         if(animation != null)
             clearTimeout(animation);
 
         animation = setTimeout(clear_animation, 100);
-
-        //console.log(left);
     }
 
     function clear_animation(){
         _state.blink.hide();
         _state.blink_left.hide();
         _state.blink_right.hide();
+        _state.smile.hide();
+        _state.sad.hide();
         _state.idle.show();
     }
 
+    function smile_or_not(value){
+
+        if( typeof value == 'string' )
+            value = parseFloat(value.replace(',', '.'));
+
+        value = (value < 0)? 0 : value;
+
+        if(value > 0.25){
+            happy(value);
+        }else{
+            has_animation();
+        }
+    }
+
     function sad(value){
-        _mouth.anchor.setTo(0.4);
-        _mouth.angle = 180;
+        clear_animation();
+        _state.idle.hide();
+        _state.sad.show();
         storage.add('smile_or_not', 0);
         storage.add('rate_smile_or_not', value);
+        has_animation();
     }
 
     function happy(value){
-        _mouth.anchor.setTo(0.6);
-        _mouth.angle = 0;
+         clear_animation();
+        _state.idle.hide();
+        _state.smile.show();
         storage.add('smile_or_not', 1);
         storage.add('rate_smile_or_not', value);
+        has_animation();
     }
     
     return{
@@ -361,7 +393,7 @@ var body = (function(){
         blink : blink,
         sad : sad,
         happy : happy,
-        smile : smile
+        smile_or_not : smile_or_not
     }
 
 })();
@@ -446,13 +478,12 @@ var server = (function(){
             console.warn("Teste finalizado, confira o resultado!!!");
             return;
         }
-        
 
         // Inicia o processo de armazenamento de eventos
         storage.new_data();
         
-        //smile(data);
         blink(data);
+        smile(data);
 
         // Salva a nova ocorrencia de eventos
         storage.save_new_data();
@@ -461,7 +492,7 @@ var server = (function(){
     function smile(detection){
         console.log(detection);
 
-        body.smile(detection.mouth);
+        body.smile_or_not(detection.mouth);
     }
 
     function blink(data){
@@ -560,9 +591,9 @@ function update(){
     }
 
     if (cursors.up.isDown){
-        body.sad(random(0.4, 1));
+        body.smile_or_not(random(0.25, 1));
     }else if (cursors.down.isDown){
-        body.happy(random(0, 0.19));
+        body.smile_or_not(random(0, 0.24));
     }
 
     // Salva a nova ocorrencia de eventos
