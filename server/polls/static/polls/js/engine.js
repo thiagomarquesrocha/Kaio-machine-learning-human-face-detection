@@ -4,8 +4,8 @@ var cursors;
 var MAX_TEST = 200;
 var text;
 var DELAY_MSG = false;
-// 172.25.9.96
-var SERVER = '192.168.1.118';
+// 192.168.1.118
+var SERVER = '172.25.9.96';
 
 var storage = (function(){
     var _data = [];
