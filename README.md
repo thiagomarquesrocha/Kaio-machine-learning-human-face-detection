@@ -1,5 +1,5 @@
 # Kaio face detectetion predicting users
-Machine Learning project to detect gestures on human faces trying to predict what user is. The project was made with Django, Scikit learn, Pharser JS and Jquery.
+Machine Learning project to detect gestures on human faces trying to predict what user is. The project was made with **Django, Scikit learn, Pharser JS and Jquery**.
 
 ![Smile](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/smile_face_detection.png)
 
@@ -61,13 +61,21 @@ pyhton manage.py runserver
 The Kaio dataset consists of 1500 data points, with each datapoint having 7 features.
 
 **Features**
+
 1.  `user`: user id
+
 2. `rate_blink_left`: percentage the user blinked left eye
+
 3. `rate_blink_right`: percentage the user blinked right eye
+
 4. `rate_smile_or_not`: percentage the user smile
+
 5. `blink_left`: blinked left eye ( 1 = Yes | 0 = No )
+
 6. `blink_right`: blinked right eye ( 1 = Yes | 0 = No )
+
 7. `smile_or_not`: smiled ( 1 = Yes | 0 = No )
 
 **Target Variable**
+
 1. `user`: user id
