@@ -2,10 +2,15 @@ var debug = true;
 var pause_test = false;
 var cursors;
 var MAX_TEST = 200;
+var text;
+var DELAY_MSG = false;
+// 172.25.9.96
+var SERVER = '192.168.1.118';
 
 var storage = (function(){
     var _data = [];
     var _index;
+    var _user = 1;
     var _new_data_map, _new_data;
 
     function recovery(){
@@ -103,15 +108,97 @@ var storage = (function(){
             var value = param[1];
             if(label == 'user'){
                setUser(value);
+            }else if(label == 'test'){
+                setTest(value);
             }
         }
+    }
+
+    function setTest(value){
+        MAX_TEST = parseInt(value);
     }
 
     function setUser(value){
         _user = parseInt(value);
     }
 
+    function getData(){
+        return _data;
+    }
+
+    function isTestFinished(){
+        if(pause_test){
+            show_msg("O kaio aprendeu sobre vc!");
+            console.warn("Teste finalizado, confira o resultado!!!");
+            return true;
+        }
+        return false;
+    }
+
+    function save_whois(){
+        if(isTestFinished()){
+            var gestures = '';
+            var new_data = getData();
+            for(var key in new_data){
+                gestures += new_data[key].join() + "|";
+            }
+            //console.log(gestures);
+            // Salva os dados aprendidos
+            $.ajax({
+                method: "GET",
+                url: "http://"+SERVER+":8000/polls/save/whois/",
+                data: { whois: gestures }
+            })
+            .done(function( msg ) {
+                console.log( "Data Saved: ", msg );
+                // Tentar prever quem eh o usuario
+                $.ajax({
+                    method: "GET",
+                    url: "http://"+SERVER+":8000/polls/predict/",
+                    data: {  }
+                })
+                .done(function( msg ) {
+                    console.log( "Data Saved: ", msg );
+                    show_msg(msg);
+                    DELAY_MSG = true;
+                    setTimeout(function(){
+                        DELAY_MSG = false;
+                    }, 2000);
+                });
+            });
+            return true;
+        }
+
+        return false;
+    }
+
+    function save_data(){
+        recovery();
+        var gestures = '';
+        var new_data = getData();
+        for(var key in new_data){
+            gestures += new_data[key].join() + "|";
+        }
+        $.ajax({
+            method: "GET",
+            url: "http://"+SERVER+":8000/polls/save/data",
+            data: { data : gestures }
+        })
+        .done(function( msg ) {
+            console.log( "Data Saved: ", msg );
+            show_msg(msg);
+            DELAY_MSG = true;
+            setTimeout(function(){
+                DELAY_MSG = false;
+            }, 2000);
+        });
+    }
+
     return{
+        save_data : save_data,
+        isTestFinished : isTestFinished,
+        save_whois : save_whois,
+        getData : getData,
         recovery : recovery,
         read : read,
         new_data : new_data,
@@ -141,12 +228,12 @@ var body = (function(){
     function preload(){
         //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
         //  blank frames at the end, so we tell the loader how many to load
-        game.load.atlas('idle', 'assets/idle.png', 'js/idle.json');
-        game.load.atlas('smile', 'assets/smile.png', 'js/smile.json');
-        game.load.atlas('sad', 'assets/sad.png', 'js/sad.json');
-        game.load.image('blink_left', 'assets/blink_left.png');
-        game.load.image('blink_right', 'assets/blink_right.png');
-        game.load.image('blink', 'assets/blink.png');
+        game.load.atlas('idle', '/static/polls/assets/idle.png', '/static/polls/js/idle.json');
+        game.load.atlas('smile', '/static/polls/assets/smile.png', '/static/polls/js/smile.json');
+        game.load.atlas('sad', '/static/polls/assets/sad.png', '/static/polls/js/sad.json');
+        game.load.image('blink_left', '/static/polls/assets/blink_left.png');
+        game.load.image('blink_right', '/static/polls/assets/blink_right.png');
+        game.load.image('blink', '/static/polls/assets/blink.png');
     }
 
     function bootstrap(){
@@ -474,10 +561,9 @@ var server = (function(){
 
     function gesture(data){
 
-        if(pause_test){
-            console.warn("Teste finalizado, confira o resultado!!!");
-            return;
-        }
+        if( storage.isTestFinished() ) return;
+
+        show_msg("O Kaio está aprendendo seus movimentos...");
 
         // Inicia o processo de armazenamento de eventos
         storage.new_data();
@@ -533,6 +619,11 @@ function create() {
 
     //console.log(bot);
 
+    text = game.add.text(game.world.centerX, game.world.centerY - 200, "Você parece ser o %s", { font: "65px Arial", fill: "#ffff00", align: "center" });
+
+    text.anchor.set(0.5);
+    text.alpha = 0;
+
     //	Enable p2 physics
     game.physics.startSystem(Phaser.Physics.P2JS);
 
@@ -545,15 +636,26 @@ function create() {
         // console.log(game.input.keyboard.event.keyCode);
         var code = game.input.keyboard.event.keyCode;
         switch(code){
-            case 45 :
+            case 67: // C - Limpa os dados aprendidos
+                localStorage.clear();
+                location.reload();
+                break;
+            case 65: // A - Salvar os dados de aprendizagem
+                storage.save();
+                storage.save_data();
+                break;
+            case 32 : // Space - Salvar o usuario desconhecido para predizer quem eh
+                storage.save_whois();
+                break;
+            case 45 : // 0 and Ins - Pisca ambos os olhos
                 // Pisca olho esquerdo e direito
                 body.blink(random(0, 0.49), random(0, 0.49));
                 break;
-            case 13 : // Enter
+            case 13 : // Enter - Salva os dados de aprendizagem no storage do navegador (local)
                 // Salva todas as ocorrencias
                 storage.save();
                 break;
-            case 77 : // Tecla M
+            case 77 : // M - Mostra os dados armazenados localmente 
                 // Mostra todos os registros encontrados
                 storage.read();
                 break;
@@ -562,6 +664,16 @@ function create() {
 
     // Inicia o objeto
     body.bootstrap();
+}
+
+function show_msg(msg){
+    if(DELAY_MSG) return;
+    text.text = msg;
+    text.alpha = 1;
+}
+
+function hide_msg(){
+    text.alpha = 0;
 }
 
 function updateFrame(obj, frame){
@@ -578,6 +690,10 @@ function random(min, max){
 
 function update(){
     if(!cursors) return;
+
+    if( storage.isTestFinished() ) return;
+
+    show_msg("O Kaio está aprendendo seus movimentos...");
 
     // Inicia o processo de armazenamento de eventos
     storage.new_data();
