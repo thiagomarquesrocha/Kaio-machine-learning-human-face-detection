@@ -146,7 +146,7 @@ var storage = (function(){
             // Salva os dados aprendidos
             $.ajax({
                 method: "GET",
-                url: "http://"+SERVER+":8000/polls/save/whois/",
+                url: "http://"+SERVER+":3000/polls/save/whois/",
                 data: { whois: gestures }
             })
             .done(function( msg ) {
@@ -154,7 +154,7 @@ var storage = (function(){
                 // Tentar prever quem eh o usuario
                 $.ajax({
                     method: "GET",
-                    url: "http://"+SERVER+":8000/polls/predict/",
+                    url: "http://"+SERVER+":3000/polls/predict/",
                     data: {  }
                 })
                 .done(function( msg ) {
@@ -181,7 +181,7 @@ var storage = (function(){
         }
         $.ajax({
             method: "GET",
-            url: "http://"+SERVER+":8000/polls/save/data",
+            url: "http://"+SERVER+":3000/polls/save/data",
             data: { data : gestures }
         })
         .done(function( msg ) {
@@ -540,8 +540,8 @@ var tween = (function(){
 
 var server = (function(){
     function bootstrap(){
-        //if(true) return;
-        var socket = io.connect('http://172.25.9.18:3000');
+        // if(true) return;
+        var socket = io.connect('http://'+SERVER+':8000');
 
         socket.on('connect', function () {
             //socket.emit('teste', 'hi!');
