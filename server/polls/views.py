@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-FIELDS = 'user,rate_blink_left,rate_blink_right,rate_smile_or_not,blink_left,blink_right,smile_or_not'
+FIELDS = 'user,rate_blink_left,rate_blink_right,rate_smile_or_not,feel'
 
 def index(request):
     import os
@@ -24,14 +24,6 @@ def predict(request):
 
     X, Y, df = get_full_data()
 
-    df = df.sample(frac=1)
-
-    Xdummies_df = pd.get_dummies(X)
-    Ydummies_df = Y
-
-    X = Xdummies_df.values
-    Y = Ydummies_df.values
-
     # Import 'train_test_split'
     from sklearn.cross_validation import train_test_split
 
@@ -41,9 +33,11 @@ def predict(request):
     # Success
     #print "Training and testing split was successful."
 
-    from sklearn.tree import DecisionTreeClassifier
     from collections import Counter
-    modelo = DecisionTreeClassifier(random_state=0)
+    
+    #from sklearn.multiclass import OneVsOneClassifier
+    #from sklearn.svm import LinearSVC
+    #modelo = OneVsOneClassifier(LinearSVC(random_state = 0))
 
     X_who_is, Y_who_is, df = get_who_is()
 
@@ -61,12 +55,12 @@ def predict(request):
 
     #print result
 
-    if who_is == 1:
-        msg = "Thiago eh vc?"
-    elif who_is == 2:
-        msg = "Alessandro eh vc?"
-    elif who_is == 3:
-        msg = "Ed eh vc?"
+    switcher = {
+        0: "Vc parece estar triste! :(",
+        1: "Vc parece estar surpreso! :o",
+        2: "Vc parece estar feliz! :)"
+    }
+    msg = switcher.get(who_is, "Normal")
         
     # print msg
 

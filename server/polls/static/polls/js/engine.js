@@ -2,6 +2,7 @@ var debug = true;
 var pause_test = false;
 var cursors;
 var MAX_TEST = 200;
+var FEEL = 3; // Muito feliz 
 var text;
 var DELAY_MSG = false;
 // 192.168.1.118
@@ -59,7 +60,7 @@ var storage = (function(){
 
         console.log(hasEnought, _new_data_map);
 
-        var ordened = ['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not', 'blink_left', 'blink_right', 'smile_or_not'];
+        var ordened = ['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not'];
 
         _new_data = [];
         
@@ -70,6 +71,9 @@ var storage = (function(){
             var value = _new_data_map[ordened[key]];
             _new_data.push((value)? value : 0);
         }
+
+        // Adiciona o sentimento 
+        _new_data.push(FEEL);
         
         console.log('Adicionando - ', _new_data);
         
@@ -110,8 +114,25 @@ var storage = (function(){
                setUser(value);
             }else if(label == 'test'){
                 setTest(value);
+            }else if(label == 'feel'){
+                setFeel(value);
             }
         }
+    }
+
+    function setFeel(value){
+        switch (value) {
+            case 'sad':
+                FEEL = 0;
+                break;
+            case 'surprise':
+                FEEL = 1;
+                break;
+            default: // happy
+                FEEL = 2;
+                break;
+        }
+        //FEEL = value;
     }
 
     function setTest(value){
@@ -337,9 +358,9 @@ var body = (function(){
         storage.add('rate_smile_or_not', value);
         
         if(value < 0.4 && value > 0){
-            body.sad(value);
+            body.sad();
         }else if(value > 0.4){
-            body.happy(value);
+            body.happy();
         }
     }
 
@@ -403,21 +424,6 @@ var body = (function(){
             what_eye = what_eye_blink('normal', left, right);
         }
 
-        // Verifica qual foi o evento dos olhos
-        if(what_eye ==  'right'){
-            storage.add('blink_left', 0);
-            storage.add('blink_right', 1);
-        }else if(what_eye == 'left'){
-            storage.add('blink_left', 1);
-            storage.add('blink_right', 0);
-        }else if(what_eye ==  'both'){
-            storage.add('blink_left', 1);
-            storage.add('blink_right', 1);
-        }else{ // Normal 
-            storage.add('blink_left', 0);
-            storage.add('blink_right', 0);
-        }
-
         has_animation();
 
         //console.log(left);
@@ -446,28 +452,26 @@ var body = (function(){
 
         value = (value < 0)? 0 : value;
 
+        storage.add('rate_smile_or_not', value);
+
         if(value > 0.25){
-            happy(value);
+            happy();
         }else{
             has_animation();
         }
     }
 
-    function sad(value){
+    function sad(){
         clear_animation();
         _state.idle.hide();
         _state.sad.show();
-        storage.add('smile_or_not', 0);
-        storage.add('rate_smile_or_not', value);
         has_animation();
     }
 
-    function happy(value){
+    function happy(){
          clear_animation();
         _state.idle.hide();
         _state.smile.show();
-        storage.add('smile_or_not', 1);
-        storage.add('rate_smile_or_not', value);
         has_animation();
     }
     
@@ -553,15 +557,13 @@ var server = (function(){
         socket.on('disconnect', function(){
             console.log('Desconectou');
         });
-
-        //socket.on('blink', blink);
-
-        //socket.on('smile', smile);
     }
 
     function gesture(data){
 
         if( storage.isTestFinished() ) return;
+
+        console.log('Gesture', data);
 
         show_msg("O Kaio está aprendendo seus movimentos...");
 
