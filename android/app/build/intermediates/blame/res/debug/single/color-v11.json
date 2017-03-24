@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/var/www/html/face_detection/android/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/var/www/html/face_detection/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/FaceTracker/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/var/www/html/face_detection/FaceTracker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/FaceTracker/C:\\Users\\oceanmanaus\\Downloads\\android-vision-master\\visionSamples\\FaceTracker\\app\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
+        "source": "/var/www/html/face_detection/FaceTracker/C:\\Users\\oceanmanaus\\Downloads\\android-vision-master\\visionSamples\\FaceTracker\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.1\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/FaceTracker/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/var/www/html/face_detection/FaceTracker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/color-v11/abc_background_cache_hint_selector_material_light.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/FaceTracker/C:\\Users\\oceanmanaus\\Downloads\\android-vision-master\\visionSamples\\FaceTracker\\app\\build\\intermediates\\res\\merged\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/var/www/html/face_detection/FaceTracker/C:\\Users\\oceanmanaus\\Downloads\\android-vision-master\\visionSamples\\FaceTracker\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.1\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/android/app/build/intermediates/res/merged/debug/color-v11/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/var/www/html/face_detection/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/color-v11/abc_background_cache_hint_selector_material_dark.xml"
+    }
+]
