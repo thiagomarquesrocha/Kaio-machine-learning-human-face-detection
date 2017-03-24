@@ -35,9 +35,8 @@ def predict(request):
 
     from collections import Counter
     
-    #from sklearn.multiclass import OneVsOneClassifier
-    #from sklearn.svm import LinearSVC
-    #modelo = OneVsOneClassifier(LinearSVC(random_state = 0))
+    from sklearn.ensemble import AdaBoostClassifier
+    modelo = AdaBoostClassifier()
 
     X_who_is, Y_who_is, df = get_who_is()
 
