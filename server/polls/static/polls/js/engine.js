@@ -126,7 +126,7 @@ var storage = (function(){
             case 'sad':
                 FEEL = 0;
                 break;
-            case 'surprise':
+            case 'angry':
                 FEEL = 1;
                 break;
             default: // happy

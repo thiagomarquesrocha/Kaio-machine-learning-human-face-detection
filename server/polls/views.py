@@ -56,7 +56,7 @@ def predict(request):
 
     switcher = {
         0: "Vc parece estar triste! :(",
-        1: "Vc parece estar surpreso! :o",
+        1: "Vc parece estar raiva! :o",
         2: "Vc parece estar feliz! :)"
     }
     msg = switcher.get(who_is, "Normal")
