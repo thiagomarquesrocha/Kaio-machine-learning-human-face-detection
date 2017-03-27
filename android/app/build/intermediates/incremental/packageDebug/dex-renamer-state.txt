@@ -1,4 +1,0 @@
-#Thu Mar 23 16:00:52 AMT 2017
-base.0=/var/www/html/face_detection/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/var/www/html/face_detection/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

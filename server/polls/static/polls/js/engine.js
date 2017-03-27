@@ -2,7 +2,7 @@ var debug = true;
 var pause_test = false;
 var cursors;
 var MAX_TEST = 200;
-var FEEL = 3; // Muito feliz 
+var FEEL = 2; // Muito feliz 
 var text;
 var DELAY_MSG = false;
 // 192.168.1.118
@@ -28,7 +28,8 @@ var storage = (function(){
 
     function read(){
         var text = '';
-        var new_data = shuffle(_data);
+        //var new_data = shuffle(_data);
+        var new_data = _data;
         for(var key in new_data){
            text += new_data[key].join() + "\n";
         }
