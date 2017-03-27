@@ -43,3 +43,5 @@ def performance_metric(resultados, X_train, X_test, y_train, y_test):
 
     print("Total de elementos : {}".format(total))
 
+    return vencedor
+

@@ -17,16 +17,16 @@ def plot_cm(target_names, cm, cm_norm):
     plt.figure(figsize=(10, 5))
     plt.title(u'Matriz de Confusão')
 
-    a = plt.subplot(121)
-    a.set_title(u"Matriz de Confusão Regular", fontsize=16)
-    plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.colorbar(fraction=0.046, pad=0.10)
+    # a = plt.subplot(121)
+    # a.set_title(u"Matriz de Confusão Regular", fontsize=16)
+    # plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+    # plt.colorbar(fraction=0.046, pad=0.10)
 
     tick_marks = np.arange(len(target_names))
-    plt.xticks(tick_marks, target_names, rotation=45)
-    plt.yticks(tick_marks, target_names)
-    plt.ylabel(u'Classe Verdadeira', fontsize=16)
-    plt.xlabel(u'Classe Estimada', fontsize=16)
+    # plt.xticks(tick_marks, target_names, rotation=45)
+    # plt.yticks(tick_marks, target_names)
+    # plt.ylabel(u'Classe Verdadeira', fontsize=16)
+    # plt.xlabel(u'Classe Estimada', fontsize=16)
 
     b = plt.subplot(122)
     b.set_title(u"Matriz de Confusão Normalizada", fontsize=16)
@@ -47,8 +47,8 @@ def plot(X, Y, model, table_names):
     # X é o vetor de Características (no seu exemplo, você chamou de "features")
     # Y é o vetor de Classes (no seu exemplo, você chamou de "labels")
 
-    # Cria 5 partições com os dados de disponíveis
-    kf = cross_validation.StratifiedKFold(Y, n_folds=5)
+    # Cria 10 partições com os dados de disponíveis
+    kf = cross_validation.StratifiedKFold(Y, n_folds=10)
 
     # Treina o modelo com base nos dados de treinamento EM CADA PARTIÇÃO
     # e calcula os escores 
