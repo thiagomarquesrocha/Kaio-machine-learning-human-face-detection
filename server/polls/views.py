@@ -35,8 +35,8 @@ def predict(request):
 
     from collections import Counter
     
-    from sklearn.ensemble import AdaBoostClassifier
-    modelo = AdaBoostClassifier()
+    from sklearn.tree import DecisionTreeClassifier
+    modelo = DecisionTreeClassifier(random_state=0)
 
     X_who_is, Y_who_is, df = get_who_is()
 
@@ -56,7 +56,7 @@ def predict(request):
 
     switcher = {
         0: "Vc parece estar triste! :(",
-        1: "Vc parece estar raiva! :o",
+        1: "Vc parece estar com raiva! :o",
         2: "Vc parece estar feliz! :)"
     }
     msg = switcher.get(who_is, "Normal")
