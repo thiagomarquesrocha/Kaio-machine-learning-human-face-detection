@@ -42,7 +42,31 @@ def plot_cm(target_names, cm, cm_norm):
 
 ##################################################
 
-def plot(X, Y, model, table_names):
+def evaluate(X_train, Y_train, X_test, Y_test, model, table_names):
+    # Define os dados de interesse para o problema
+
+    # Treina com a partição de treinamento
+    model.fit(X_train, Y_train)
+
+    # Verificação com a partição de teste
+    Y_pred = model.predict(X_test)
+    score = model.score(X_test, Y_test)
+
+    print("Score médio: {0:.2f}".format(score))
+
+    # Cria a matriz de confusão regular e normalizada
+    cm = confusion_matrix(Y_test, Y_pred)
+    cm_norm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+    # Imprime as matrizes de confusão
+    np.set_printoptions(precision=2)
+
+    plot_cm(table_names, cm, cm_norm)
+
+    # Exibe todas as figuras
+    plt.show()
+
+def partition(X, Y, model, table_names):
     # Define os dados de interesse para o problema
     # X é o vetor de Características (no seu exemplo, você chamou de "features")
     # Y é o vetor de Classes (no seu exemplo, você chamou de "labels")

@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 def predict(request):
-    from data import get_full_data, get_who_is
+    from data import get_full_data, get_predict
     from matplotlib import pyplot as plt
     from sklearn import linear_model
     from predicting_who_is import accuracy_score, performance_metric
@@ -38,7 +38,7 @@ def predict(request):
     from sklearn.tree import DecisionTreeClassifier
     modelo = DecisionTreeClassifier(random_state=0)
 
-    X_who_is, Y_who_is, df = get_who_is()
+    X_who_is, Y_who_is, df = get_predict()
 
     #X_who_is = df[['blink_left', 'blink_right', 'smile_or_not']]
 

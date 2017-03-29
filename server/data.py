@@ -29,3 +29,26 @@ def get_who_is():
     Y = Y_df
     X = X_df
     return X, Y, df
+
+def get_predict():
+    df = pd.read_csv('predict.csv')
+    Y_df = df['feel']
+    X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not']]
+
+    Y = Y_df
+    X = X_df
+    return X, Y, df
+
+
+def get_evaluate():
+    df = pd.read_csv('whois.csv')
+    Y_df = df['feel']
+    X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not']]
+
+    Y = Y_df
+    X = X_df
+    X_train = X[0:4263]
+    y_train = Y[0:4263]
+    X_test = X[4264:]
+    y_test = Y[4264:]
+    return X_train, y_train, X_test, y_test
