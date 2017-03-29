@@ -157,7 +157,7 @@ var storage = (function(){
         return false;
     }
 
-    function save_whois(){
+    function save_whois(predict){
         if(isTestFinished()){
             var gestures = '';
             var new_data = getData();
@@ -169,7 +169,7 @@ var storage = (function(){
             $.ajax({
                 method: "GET",
                 url: "http://"+SERVER+":3000/polls/save/whois/",
-                data: { whois: gestures }
+                data: { whois: gestures, predict : predict }
             })
             .done(function( msg ) {
                 console.log( "Data Saved: ", msg );
@@ -647,8 +647,8 @@ function create() {
                 storage.save();
                 storage.save_data();
                 break;
-            case 32 : // Space - Salvar o usuario desconhecido para predizer quem eh
-                storage.save_whois();
+            case 49 : case 50: // Space - Salvar o usuario desconhecido para predizer quem eh
+                storage.save_whois((code == 49)? 1 : 0);
                 break;
             case 45 : // 0 and Ins - Pisca ambos os olhos
                 // Pisca olho esquerdo e direito

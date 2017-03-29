@@ -1,7 +1,4 @@
 user,rate_blink_left,rate_blink_right,rate_smile_or_not,feel
-2,0,0,0,1
-2,0,0,0,1
-2,0,0,0,1
 12,0.83,0.99,0.01,1
 12,0.99,0.8,0,1
 12,0.99,0.99,0.06,1

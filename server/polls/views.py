@@ -89,19 +89,47 @@ def save_data(request):
 def save_whois(request):
 
     if request.method == 'POST':
+        predict = request.POST['predict']
         whois = request.POST['whois']
     else:
+        predict = request.GET['predict']
         whois = request.GET['whois']
+
+    if predict == '0': # CSV com emocoes que deverao ser analisadas e avaliadas
+        csv_file = "whois.csv"
+    else: # CSV temporario para prever a emocao no determinado instante
+        csv_file = "predict.csv"
     
     import csv
-    writer = csv.writer(open("whois.csv", 'wb'), delimiter=' ', escapechar=' ', quoting=csv.QUOTE_NONE)
     lines = whois.split('|')
-
     msg = ''
-    writer.writerow(FIELDS.split())
-    for row in lines:
-        r = row.split()
-        msg += row + '<br>'
-        writer.writerow(r)
+    response = ''
+
+    import glob
+    import pandas as pd
+
+    all_data = pd.DataFrame() #initializes DF which will hold aggregated csv files
+
+    #list of all df
+    dfs = []
+    for f in glob.glob(csv_file): #for all csv files in pwd
+        #add parameters to read_csv
+        if predict == '0':
+            df = pd.read_csv(f, header=None) #create dataframe for reading current csv
+        with open(csv_file, 'wb') as f1:
+            writer = csv.writer(f1, delimiter=' ', escapechar=' ', quoting=csv.QUOTE_NONE)
+            if predict == '0':
+                for i, row in df.iterrows():
+                    line = row.values
+                    w = line[0] + ',' + line[1] + ',' +  line[2] + ',' + line[3] + ',' + line[4]
+                    #print w.split()
+                    writer.writerow(w.split())
+            else:
+                 writer.writerow(FIELDS.split())
+            for row in lines:
+                r = row.split()
+                #print r
+                msg += row + '<br>'
+                writer.writerow(r)
     
-    return HttpResponse("Dados do usuario desconhecido armazenado com sucesso!")
+    return HttpResponse("Predicao armazenada com sucesso!")
