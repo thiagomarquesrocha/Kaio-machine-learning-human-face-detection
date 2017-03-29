@@ -28,7 +28,7 @@ def predict(request):
     from sklearn.cross_validation import train_test_split
 
     # Shuffle and split the data into training and testing subsets
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size = 0.8, random_state = 0)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size = 0.9, random_state = 0)
 
     # Success
     #print "Training and testing split was successful."
