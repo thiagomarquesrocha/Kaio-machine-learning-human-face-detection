@@ -1,9 +1,32 @@
 # Kaio face detectetion predicting users
-Machine Learning project to detect gestures on human faces trying to predict what user is. The project was made with **Django, Scikit learn, Pharser JS and Jquery**.
+Machine Learning project a case study focused on the interaction with digital characters, using a character called "Kaio", which, based on the automatic detection of facial expressions and classification of emotions, interacts with humans by classifying emotions and imitating expressions. As a result the tool is able to classify three emotions (sadness, anger and happiness). The project was made with **Android Mobile Vision, Django, Scikit Learn, Pharser JS and Jquery**.
+
+### Demo
+
+**Animation states**
+
+![Animation](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/animacoes_estado_personagem.png)
+
+**Learning human emotion**
 
 ![Smile](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/smile_face_detection.png)
 
+
+**Detecting human face expression**
+
 ![Smile 2](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/smile_face_detection_2.png)
+
+
+### Architecture
+
+The architecture was divided by three components: 
+
+
+- Cellphone: face expression detector; 
+- Server: Emotion classifier;
+- Web: Character digital.
+
+![Architecture](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/Arquitetura.jpg)
 
 ### Data exploration:
 
