@@ -7,9 +7,9 @@ Machine Learning project to detect gestures on human faces trying to predict wha
 
 ### Data exploration:
 
-- 1500 observations
-- 7 features
-- 3 distinct users
+- 4264 face expressions
+- 5 features
+- 12 distinct users
 
 
 ### Install
@@ -58,24 +58,18 @@ pyhton manage.py runserver
 
 ### Data
 
-The Kaio dataset consists of 1500 data points, with each datapoint having 7 features.
+The Kaio dataset consists of 4264 data points, with each datapoint having 5 features.
 
 **Features**
 
 1.  `user`: user id
 
-2. `rate_blink_left`: percentage the user blinked left eye
+2. `rate_blink_left`: percentage the user blinked left eye (0.0 until 1.0)
 
-3. `rate_blink_right`: percentage the user blinked right eye
+3. `rate_blink_right`: percentage the user blinked right eye (0.0 until 1.0)
 
-4. `rate_smile_or_not`: percentage the user smile
-
-5. `blink_left`: blinked left eye ( 1 = Yes | 0 = No )
-
-6. `blink_right`: blinked right eye ( 1 = Yes | 0 = No )
-
-7. `smile_or_not`: smiled ( 1 = Yes | 0 = No )
+4. `rate_smile_or_not`: percentage the user smile (0.0 until 1.0)
 
 **Target Variable**
 
-1. `user`: user id
+1. `emotion`: feelings (0-sadness | 1-angry | 2-happiness)
