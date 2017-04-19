@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -63,8 +64,9 @@ def predict(request):
         
     # print msg
 
+    res = { "msg": msg, "emotion" : who_is }
 
-    return HttpResponse(msg)
+    return JsonResponse(res)
 
 def save_data(request):
 

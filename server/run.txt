@@ -1,1 +1,11 @@
-jupyter notebook --port=8889
+
+# Executar o explorador de dados
+jupyter notebook --port=8889 notebook.ipynb
+
+
+# Executar o servidor classificador de emocoes
+python manage.py runserver [IP]:[PORT]
+
+
+# Executar o servidor socket.io
+python server.py

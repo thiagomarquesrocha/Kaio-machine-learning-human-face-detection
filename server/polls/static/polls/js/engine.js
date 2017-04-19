@@ -179,12 +179,14 @@ var storage = (function(){
                     url: "http://"+SERVER+":3000/polls/predict/",
                     data: {  }
                 })
-                .done(function( msg ) {
-                    console.log( "Data Saved: ", msg );
-                    show_msg(msg);
+                .done(function( data ) {
+                    console.log( "Data Saved: ", data.msg );
+                    show_msg(data.msg);
+                    body.show_emotion(data.emotion);
                     DELAY_MSG = true;
                     setTimeout(function(){
                         DELAY_MSG = false;
+                        body.hide_emotion(data.emotion);
                     }, 2000);
                 });
             });
@@ -253,6 +255,9 @@ var body = (function(){
         game.load.atlas('idle', '/static/polls/assets/idle.png', '/static/polls/js/idle.json');
         game.load.atlas('smile', '/static/polls/assets/smile.png', '/static/polls/js/smile.json');
         game.load.atlas('sad', '/static/polls/assets/sad.png', '/static/polls/js/sad.json');
+        game.load.image('state_sad', '/static/polls/assets/state_sad.png');
+        game.load.image('state_angry', '/static/polls/assets/state_angry.png');
+        game.load.image('state_happy', '/static/polls/assets/state_happy.png');
         game.load.image('blink_left', '/static/polls/assets/blink_left.png');
         game.load.image('blink_right', '/static/polls/assets/blink_right.png');
         game.load.image('blink', '/static/polls/assets/blink.png');
@@ -267,6 +272,9 @@ var body = (function(){
         var blink_right = create_state_static('blink_right', x, y);
         var smile = create_state_animated('smile', x, y);
         var sad = create_state_animated('sad', x, y);
+        var state_sad = create_state_static('state_sad', x, y);
+        var state_angry = create_state_static('state_angry', x, y);
+        var state_happy = create_state_static('state_happy', x, y);
         smile.show();
         smile.play();
         smile.hide();
@@ -475,6 +483,40 @@ var body = (function(){
         _state.smile.show();
         has_animation();
     }
+
+    function show_emotion(emotion){
+
+        clear_animation();
+        _state.idle.hide();
+
+        switch (emotion) {
+            case 0:
+                _state.state_sad.show();
+                break;
+            case 1:
+                _state.state_angry.show();
+                break;
+            default:
+                _state.state_happy.show();
+                break;
+        }
+    }
+
+    function hide_emotion(emotion){
+        switch (emotion) {
+            case 0:
+                _state.state_sad.hide();
+                break;
+            case 1:
+                _state.state_angry.hide();
+                break;
+            default:
+                _state.state_happy.hide();
+                break;
+        }
+
+        clear_animation();
+    }
     
     return{
         preload : preload,
@@ -485,7 +527,9 @@ var body = (function(){
         blink : blink,
         sad : sad,
         happy : happy,
-        smile_or_not : smile_or_not
+        smile_or_not : smile_or_not,
+        show_emotion : show_emotion,
+        hide_emotion : hide_emotion
     }
 
 })();
