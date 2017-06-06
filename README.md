@@ -1,7 +1,7 @@
 # Kaio: face detectetion predicting emotion
 Machine Learning project a case study focused on the interaction with digital characters, using a character called "Kaio", which, based on the automatic detection of facial expressions and classification of emotions, interacts with humans by classifying emotions and imitating expressions. As a result the tool is able to classify three emotions (sadness, anger and happiness). The project was made with **Android Mobile Vision, Django, Scikit Learn, Pharser JS and Jquery**.
 
-![Overview](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/overview.png)
+![Overview](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/visao_geral.png)
 
 ### Demo
 
