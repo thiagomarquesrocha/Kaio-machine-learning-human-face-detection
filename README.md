@@ -1,20 +1,28 @@
 # Kaio: face detectetion predicting emotion
 Machine Learning project a case study focused on the interaction with digital characters, using a character called "Kaio", which, based on the automatic detection of facial expressions and classification of emotions, interacts with humans by classifying emotions and imitating expressions. As a result the tool is able to classify three emotions (sadness, anger and happiness). The project was made with **Android Mobile Vision, Django, Scikit Learn, Pharser JS and Jquery**.
 
+![Overview](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/overview.png)
+
 ### Demo
 
 **Animation states**
 
-![Animation](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/animacoes_estado_personagem.png)
+Kaio has 4 states
+
+![Animation](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/animacoes_estado_personagem.png)
 
 **Learning human emotion**
 
-![Smile](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/smile_face_detection.png)
+Kaio need to learn how humans interact
+
+![Smile](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/smile_face_detection.png)
 
 
 **Detecting human face expression**
 
-![Smile 2](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/smile_face_detection_2.png)
+In this phase, Kaio is detecting face expression in real time
+
+![Smile 2](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/smile_face_detection_2.png)
 
 
 ### Architecture
@@ -26,7 +34,7 @@ The architecture was divided by three components:
 - Server: Emotion classifier;
 - Web: Character digital.
 
-![Architecture](https://raw.githubusercontent.com/thiagomarques2015/face_detectetion_web/master/Arquitetura.jpg)
+![Architecture](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/Arquitetura.jpg)
 
 ### Data exploration:
 
