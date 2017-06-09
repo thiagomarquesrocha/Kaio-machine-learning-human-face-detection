@@ -67,7 +67,7 @@ Template code is provided in the `server/classify_who_is_notebook.ipynb` noteboo
 
 In a terminal or command window, navigate to the project sub directory `server/` and run one of the following commands:
 
-#### Analysis
+#### ANALYSIS
 
 ```bash
 ipython notebook classify_who_is_notebook.ipynb
@@ -79,13 +79,24 @@ jupyter notebook classify_who_is_notebook.ipynb
 
 This will open the Jupyter Notebook software and project file in your browser.
 
-#### Test
+#### TEST
 
-To test the front end application of Kaio
+__Front__
+
+Run the emotion classify server/front
 
 ```bash
-pyhton manage.py runserver
-```  
+python manage.py runserver [IP]:[PORT]
+```
+
+__Server__
+
+Run the socket.io server to connect front and server
+
+```bash
+python server.py
+```
+
 
 ### Data
 
