@@ -3,6 +3,8 @@ import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
 
+# Documentation Socket IO
+# - https://github.com/miguelgrinberg/python-socketio
 sio = socketio.Server()
 app = Flask(__name__)
 
@@ -28,4 +30,4 @@ if __name__ == '__main__':
     app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('172.25.9.96', 8000)), app)
+    eventlet.wsgi.server(eventlet.listen(('192.168.1.114', 8000)), app)

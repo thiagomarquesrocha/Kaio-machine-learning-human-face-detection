@@ -1,11 +1,13 @@
 
 # Executar o explorador de dados
-jupyter notebook --port=8889 notebook.ipynb
-
+Ex: jupyter notebook --port=8889 notebook.ipynb
+    jupyter notebook notebook.ypynb
 
 # Executar o servidor classificador de emocoes
 python manage.py runserver [IP]:[PORT]
+Ex: 192.168.1.114:3000
 
 
 # Executar o servidor socket.io
+# TODO: Alterar o IP dentro do arquivo server.py na linha 33
 python server.py

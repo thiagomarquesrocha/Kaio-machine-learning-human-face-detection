@@ -5,8 +5,8 @@ var MAX_TEST = 200;
 var FEEL = 2; // Muito feliz 
 var text;
 var DELAY_MSG = false;
-// 192.168.1.118
-var SERVER = '172.25.9.96';
+// 172.25.9.96
+var SERVER = '192.168.1.114';
 
 var storage = (function(){
     var _data = [];
