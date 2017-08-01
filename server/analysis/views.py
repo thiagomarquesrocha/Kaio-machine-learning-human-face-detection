@@ -8,12 +8,12 @@ FIELDS = 'user,rate_blink_left,rate_blink_right,rate_smile_or_not,feel'
 
 def index(request):
     import os
-    path = os.path.abspath("polls/index.html")
+    path = os.path.abspath("analysis/index.html")
     #return HttpResponse(path)
     context = {
         
     }
-    return render(request, 'polls/index.html', context)
+    return render(request, 'analysis/index.html', context)
 
 def predict(request):
     from data import get_full_data, get_predict
@@ -61,10 +61,8 @@ def predict(request):
         2: "Vc parece estar feliz! :)"
     }
     msg = switcher.get(who_is, "Normal")
-        
-    # print msg
 
-    res = { "msg": msg, "emotion" : who_is }
+    res = { "msg": msg, "emotion" : int(who_is) }
 
     return JsonResponse(res)
 

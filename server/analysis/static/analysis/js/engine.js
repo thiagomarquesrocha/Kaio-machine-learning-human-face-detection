@@ -168,7 +168,7 @@ var storage = (function(){
             // Salva os dados aprendidos
             $.ajax({
                 method: "GET",
-                url: "http://"+SERVER+":3000/polls/save/whois/",
+                url: "http://"+SERVER+":3000/analysis/save/whois/",
                 data: { whois: gestures, predict : predict }
             })
             .done(function( msg ) {
@@ -176,7 +176,7 @@ var storage = (function(){
                 // Tentar prever quem eh o usuario
                 $.ajax({
                     method: "GET",
-                    url: "http://"+SERVER+":3000/polls/predict/",
+                    url: "http://"+SERVER+":3000/analysis/predict/",
                     data: {  }
                 })
                 .done(function( data ) {
@@ -205,7 +205,7 @@ var storage = (function(){
         }
         $.ajax({
             method: "GET",
-            url: "http://"+SERVER+":3000/polls/save/data",
+            url: "http://"+SERVER+":3000/analysis/save/data",
             data: { data : gestures }
         })
         .done(function( msg ) {
@@ -252,15 +252,15 @@ var body = (function(){
     function preload(){
         //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
         //  blank frames at the end, so we tell the loader how many to load
-        game.load.atlas('idle', '/static/polls/assets/idle.png', '/static/polls/js/idle.json');
-        game.load.atlas('smile', '/static/polls/assets/smile.png', '/static/polls/js/smile.json');
-        game.load.atlas('sad', '/static/polls/assets/sad.png', '/static/polls/js/sad.json');
-        game.load.image('state_sad', '/static/polls/assets/state_sad.png');
-        game.load.image('state_angry', '/static/polls/assets/state_angry.png');
-        game.load.image('state_happy', '/static/polls/assets/state_happy.png');
-        game.load.image('blink_left', '/static/polls/assets/blink_left.png');
-        game.load.image('blink_right', '/static/polls/assets/blink_right.png');
-        game.load.image('blink', '/static/polls/assets/blink.png');
+        game.load.atlas('idle', '/static/analysis/assets/idle.png', '/static/analysis/js/idle.json');
+        game.load.atlas('smile', '/static/analysis/assets/smile.png', '/static/analysis/js/smile.json');
+        game.load.atlas('sad', '/static/analysis/assets/sad.png', '/static/analysis/js/sad.json');
+        game.load.image('state_sad', '/static/analysis/assets/state_sad.png');
+        game.load.image('state_angry', '/static/analysis/assets/state_angry.png');
+        game.load.image('state_happy', '/static/analysis/assets/state_happy.png');
+        game.load.image('blink_left', '/static/analysis/assets/blink_left.png');
+        game.load.image('blink_right', '/static/analysis/assets/blink_right.png');
+        game.load.image('blink', '/static/analysis/assets/blink.png');
     }
 
     function bootstrap(){
