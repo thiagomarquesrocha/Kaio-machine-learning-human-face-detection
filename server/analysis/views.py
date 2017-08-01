@@ -9,10 +9,7 @@ FIELDS = 'user,rate_blink_left,rate_blink_right,rate_smile_or_not,feel'
 def index(request):
     import os
     path = os.path.abspath("analysis/index.html")
-    #return HttpResponse(path)
-    context = {
-        
-    }
+    context = {}
     return render(request, 'analysis/index.html', context)
 
 def predict(request):
@@ -74,7 +71,7 @@ def save_data(request):
         data = request.GET['data']
     
     import csv
-    writer = csv.writer(open("detect.csv", 'wb'), delimiter=' ', escapechar=' ', quoting=csv.QUOTE_NONE)
+    writer = csv.writer(open("data/detect.csv", 'wb'), delimiter=' ', escapechar=' ', quoting=csv.QUOTE_NONE)
     lines = data.split('|')
 
     msg = ''
@@ -86,22 +83,26 @@ def save_data(request):
 
     return HttpResponse("Dados de treinamento armazenados com sucesso!")
 
+# Save the training data for use in predict analysis
 def save_whois(request):
+    # This method receive two kinds of predict:
+    # 0 - create whois.csv and add the new lines at the end of csv file
+    # 1 - create predict.csv rewriting the existing file if he was created
 
     if request.method == 'POST':
         predict = request.POST['predict']
-        whois = request.POST['whois']
+        csv_data = request.POST['whois']
     else:
         predict = request.GET['predict']
-        whois = request.GET['whois']
+        csv_data = request.GET['whois']
 
     if predict == '0': # CSV com emocoes que deverao ser analisadas e avaliadas
-        csv_file = "whois.csv"
+        csv_file = "data/whois.csv"
     else: # CSV temporario para prever a emocao no determinado instante
-        csv_file = "predict.csv"
+        csv_file = "data/predict.csv"
     
     import csv
-    lines = whois.split('|')
+    lines = csv_data.split('|')
     msg = ''
     response = ''
 

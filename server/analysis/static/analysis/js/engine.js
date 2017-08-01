@@ -691,7 +691,15 @@ function create() {
                 storage.save();
                 storage.save_data();
                 break;
-            case 49 : case 50: // Space - Salvar o usuario desconhecido para predizer quem eh
+            case 49 : case 50: // Number 1 or 2 - Save unknown user to predict the feeling
+                /**
+                 * Keyboard
+                 *  49 - number 1 ( send predict 1 )
+                 *  50 - number 2 ( send predict 0 )
+                 */
+                // save_whois(predict) where predict values is:
+                // 0 - create whois.csv and add the new lines at the end of csv file
+                // 1 - create predict.csv rewriting the existing file if he was created
                 storage.save_whois((code == 49)? 1 : 0);
                 break;
             case 45 : // 0 and Ins - Pisca ambos os olhos
