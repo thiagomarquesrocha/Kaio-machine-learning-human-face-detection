@@ -1,7 +1,7 @@
 # Kaio: face detectetion predicting emotion
 Machine Learning project a case study focused on the interaction with digital characters, using a character called "Kaio", which, based on the automatic detection of facial expressions and classification of emotions, interacts with humans by classifying emotions and imitating expressions. As a result the tool is able to classify three emotions (sadness, anger and happiness). The project was made with **Android Mobile Vision, Django, Scikit Learn, Pharser JS and Jquery**.
 
-![Overview](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/visao_geral.png)
+![Overview](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/kaio/images/visao_geral.png)
 
 ### Demo
 
@@ -9,20 +9,13 @@ Machine Learning project a case study focused on the interaction with digital ch
 
 Kaio has 4 states
 
-![Animation](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/animacoes_estado_personagem.png)
+![Animation](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/kaio/images/animacoes_estado_personagem.png)
 
-**Learning human emotion**
+**Demo how to learning and detecting human face emotion**
 
-Kaio need to learn how humans interact
+Kaio need to learn how humans interact then detect the facial expression in real time
 
-![Smile](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/smile_face_detection.png)
-
-
-**Detecting human face expression**
-
-In this phase, Kaio is detecting face expression in real time
-
-![Smile 2](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/smile_face_detection_2.png)
+![Smile](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/kaio/images/smile_face_detection.png)
 
 
 ### Architecture
@@ -34,7 +27,7 @@ The architecture was divided by three components:
 - Server: Emotion classifier;
 - Web: Character digital.
 
-![Architecture](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/Arquitetura.jpg)
+![Architecture](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/kaio/images/Arquitetura.jpg)
 
 ### Data exploration:
 
@@ -61,25 +54,29 @@ If you do not have Python installed yet, it is highly recommended that you insta
 
 ### Code
 
-Template code is provided in the `server/classify_who_is_notebook.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `detect.csv` and `whois.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
+Template code is provided in the `kaio/kaio.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `detect.csv` and `training.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
 
 ### Run
 
-In a terminal or command window, navigate to the project sub directory `server/` and run one of the following commands:
+In a terminal or command window, navigate to the project sub directory `server/` or `kaio/` and run one of the following commands:
 
 #### ANALYSIS
 
+In `kaio/` execute:
+
 ```bash
-ipython notebook classify_who_is_notebook.ipynb
+ipython notebook kaio.ipynb
 ```  
 or
 ```bash
-jupyter notebook classify_who_is_notebook.ipynb
+jupyter notebook kaio.ipynb
 ```
 
 This will open the Jupyter Notebook software and project file in your browser.
 
 #### TEST
+
+In `server/` execute:
 
 __Front__
 
@@ -114,4 +111,4 @@ The Kaio dataset consists of 4264 data points, with each datapoint having 5 feat
 
 **Target Variable**
 
-1. `emotion`: feelings (0-sadness | 1-angry | 2-happiness)
+1. `feel`: emotion (0-sadness | 1-angry | 2-happiness)

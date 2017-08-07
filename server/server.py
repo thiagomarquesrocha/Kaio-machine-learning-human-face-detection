@@ -1,10 +1,21 @@
+#############################################################
+#  Socket.io connecting the app and web devices
+#############################################################
+
+# Import
 import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
 
-# Documentation Socket IO
-# - https://github.com/miguelgrinberg/python-socketio
+# Your IP local address
+SERVER = '192.168.1.110'
+
+#################
+## Documentation
+#################
+## https://github.com/miguelgrinberg/python-socketio
+#################
 sio = socketio.Server()
 app = Flask(__name__)
 
@@ -30,4 +41,4 @@ if __name__ == '__main__':
     app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('192.168.1.114', 8000)), app)
+    eventlet.wsgi.server(eventlet.listen((SERVER, 3000)), app)

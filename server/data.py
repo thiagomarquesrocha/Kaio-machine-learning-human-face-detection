@@ -1,5 +1,15 @@
+####################################################
+#  Data methods supporting to get the training data
+####################################################
+
+# Import
 import pandas as pd
 
+######## 
+## Cols:  user, feel, rate_blink_left, rate_blink_right, rate_smile_or_not
+########
+
+### Get the full training model with dummies
 def get_data():
     df = pd.read_csv('data/detect.csv')
     Y_df = df['feel']
@@ -11,8 +21,9 @@ def get_data():
     Y = Ydummies_df.values
     return X, Y
 
+### Get the full training model
 def get_full_data():
-    df = pd.read_csv('data/detect.csv')
+    df = pd.read_csv('..\server\data\detect.csv')
     # df = df.sample(frac=1)
     Y_df = df['feel']
     X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not']]
@@ -21,8 +32,9 @@ def get_full_data():
     X = X_df
     return X, Y, df
 
-def get_who_is():
-    df = pd.read_csv('data/whois.csv')
+### Get a training data
+def get_training():
+    df = pd.read_csv('data/training.csv')
     Y_df = df['feel']
     X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not']]
 
@@ -30,8 +42,9 @@ def get_who_is():
     X = X_df
     return X, Y, df
 
-def get_predict():
-    df = pd.read_csv('data/predict.csv')
+### Get a temporary data to predict wich feeling is
+def get_predict(parent=''):
+    df = pd.read_csv(parent + 'data/predict.csv')
     Y_df = df['feel']
     X_df = df[['rate_blink_left', 'rate_blink_right', 'rate_smile_or_not']]
 
@@ -40,6 +53,7 @@ def get_predict():
     return X, Y, df
 
 
+### Get an specific data from training
 def get_evaluate():
     df = pd.read_csv('data/whois.csv')
     Y_df = df['feel']

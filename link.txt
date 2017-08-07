@@ -1,8 +1,0 @@
-https://github.com/juliangarnier/anime
-
-https://curran.github.io/HTML5Examples/canvas/smileyFace.html
-
-
-https://phaser.io/tutorials/making-your-first-phaser-game
-
-https://www.codeandweb.com/blog/2014/12/17/creating-spritesheets-for-phaser-with-texturepacker

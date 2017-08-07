@@ -1,11 +1,15 @@
+#############################################################
+#  Predict methods supporting to test accuracy and perfomance
+#############################################################
+
+# Import
 from collections import Counter
 import numpy as np
 from sklearn.model_selection import cross_val_score
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
-
+### Get the accuracy score for input truth and predictions.s
 def accuracy_score(nome, modelo, X_train, y_train):
-    """ Returns accuracy score for input truth and predictions. """
     k = 10
     # Ensure that the number of predictions matches number of outcomes using k-fold
     scores = cross_val_score(modelo, X_train, y_train, cv = k)
@@ -15,10 +19,9 @@ def accuracy_score(nome, modelo, X_train, y_train):
     print msg
     return taxa_de_acerto 
 
+### Get the perfomance score for one algorithm.
 def performance_metric(resultados, X_train, X_test, y_train, y_test):
-
-    # a eficacia do algoritmo que chuta
-    # tudo um unico valor
+    # A eficacia do algoritmo que chuta, tudo em um unico valor
     acerto_base = max(Counter(y_test).itervalues())
     taxa_de_acerto_base = 100.0 * acerto_base / len(y_test)
 

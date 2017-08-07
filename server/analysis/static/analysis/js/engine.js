@@ -2,11 +2,13 @@ var debug = true;
 var pause_test = false;
 var cursors;
 var MAX_TEST = 200;
-var FEEL = 2; // Muito feliz 
+var FEEL = 2; // Feliz 
 var text;
 var DELAY_MSG = false;
-// 172.25.9.96
-var SERVER = '192.168.1.114';
+// Your IP local address
+var SERVER = '192.168.1.110';
+var PORT = "8000";
+var SOCKET_PORT = "3000";
 
 var storage = (function(){
     var _data = [];
@@ -157,7 +159,7 @@ var storage = (function(){
         return false;
     }
 
-    function save_whois(predict){
+    function save_training(predict){
         if(isTestFinished()){
             var gestures = '';
             var new_data = getData();
@@ -168,15 +170,15 @@ var storage = (function(){
             // Salva os dados aprendidos
             $.ajax({
                 method: "GET",
-                url: "http://"+SERVER+":3000/analysis/save/whois/",
-                data: { whois: gestures, predict : predict }
+                url: "http://"+SERVER+":"+PORT+"/analysis/save/training/",
+                data: { training: gestures, predict : predict }
             })
             .done(function( msg ) {
                 console.log( "Data Saved: ", msg );
                 // Tentar prever quem eh o usuario
                 $.ajax({
                     method: "GET",
-                    url: "http://"+SERVER+":3000/analysis/predict/",
+                    url: "http://"+SERVER+":"+PORT+"/analysis/predict/",
                     data: {  }
                 })
                 .done(function( data ) {
@@ -205,7 +207,7 @@ var storage = (function(){
         }
         $.ajax({
             method: "GET",
-            url: "http://"+SERVER+":3000/analysis/save/data",
+            url: "http://"+SERVER+":"+PORT+"/analysis/save/data",
             data: { data : gestures }
         })
         .done(function( msg ) {
@@ -221,7 +223,7 @@ var storage = (function(){
     return{
         save_data : save_data,
         isTestFinished : isTestFinished,
-        save_whois : save_whois,
+        save_training : save_training,
         getData : getData,
         recovery : recovery,
         read : read,
@@ -590,7 +592,7 @@ var tween = (function(){
 var server = (function(){
     function bootstrap(){
         // if(true) return;
-        var socket = io.connect('http://'+SERVER+':8000');
+        var socket = io.connect('http://'+SERVER+':'+SOCKET_PORT);
 
         socket.on('connect', function () {
             //socket.emit('teste', 'hi!');
@@ -697,10 +699,10 @@ function create() {
                  *  49 - number 1 ( send predict 1 )
                  *  50 - number 2 ( send predict 0 )
                  */
-                // save_whois(predict) where predict values is:
-                // 0 - create whois.csv and add the new lines at the end of csv file
+                // save_training(predict) where predict values is:
+                // 0 - create training.csv and add the new lines at the end of csv file
                 // 1 - create predict.csv rewriting the existing file if he was created
-                storage.save_whois((code == 49)? 1 : 0);
+                storage.save_training((code == 49)? 1 : 0);
                 break;
             case 45 : // 0 and Ins - Pisca ambos os olhos
                 // Pisca olho esquerdo e direito
