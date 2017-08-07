@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from sklearn import datasets
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import cross_validation
+from sklearn import model_selection
 from sklearn.metrics import confusion_matrix
 
 ##################################################
