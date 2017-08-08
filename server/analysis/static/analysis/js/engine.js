@@ -1,3 +1,8 @@
+/*
+***************
+  Kaio options
+***************
+ */
 var debug = true;
 var pause_test = false;
 var cursors;
@@ -235,7 +240,7 @@ var storage = (function(){
     }
 })();
 
-/** Objeto principal */
+/** Main */
 var body = (function(){
     var _state = {
         blink : {
@@ -536,6 +541,7 @@ var body = (function(){
 
 })();
 
+/** Animation */
 var tween = (function(){
 
     function eye(what_eye){
@@ -589,6 +595,7 @@ var tween = (function(){
     }
 })();
 
+/** Server Socket.io */
 var server = (function(){
     function bootstrap(){
         // if(true) return;

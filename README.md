@@ -11,7 +11,7 @@ Kaio has 4 states
 
 ![Animation](https://raw.githubusercontent.com/thiagomarquesrocha/Kaio-machine-learning-human-face-detection/master/kaio/images/animacoes_estado_personagem.png)
 
-**Demo how to learning and detecting human face emotion**
+**How to learning and detecting human face emotion**
 
 Kaio need to learn how humans interact then detect the facial expression in real time
 
@@ -46,6 +46,7 @@ This project requires **Python 2.7** and the following Python libraries installe
 - [scikit-learn](http://scikit-learn.org/stable/)
 - [scipy](https://www.scipy.org/)
 - [django](https://www.djangoproject.com/)
+- [python-socketio](http://python-socketio.readthedocs.io/en/latest/)
 
 
 You will also need to have software installed to run and execute a [Jupyter Notebook](http://ipython.org/notebook.html)
