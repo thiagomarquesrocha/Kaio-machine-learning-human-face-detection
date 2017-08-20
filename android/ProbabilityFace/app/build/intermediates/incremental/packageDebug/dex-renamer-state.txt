@@ -1,4 +1,0 @@
-#Mon Mar 27 17:41:37 AMT 2017
-base.0=/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
