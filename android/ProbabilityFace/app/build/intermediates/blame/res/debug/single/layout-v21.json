@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/ocean/.android/build-cache/abcb47c51679e5b5d359d75bbc22a03778c00273/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/ocean/.android/build-cache/abcb47c51679e5b5d359d75bbc22a03778c00273/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/ocean/.android/build-cache/abcb47c51679e5b5d359d75bbc22a03778c00273/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/home/ocean/.android/build-cache/abcb47c51679e5b5d359d75bbc22a03778c00273/output/res/layout-v21/notification_action.xml"
+    }
+]
