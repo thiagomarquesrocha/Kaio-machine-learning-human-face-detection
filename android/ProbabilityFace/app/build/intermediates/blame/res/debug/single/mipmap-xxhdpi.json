@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/var/www/html/face_detection/android/ProbabilityFace/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/var/www/html/face_detection/android/ProbabilityFace/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher_round.png",
+        "source": "/var/www/html/face_detection/android/ProbabilityFace/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    }
+]
