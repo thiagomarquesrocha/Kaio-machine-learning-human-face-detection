@@ -43,7 +43,7 @@ This project requires **Python 2.7** and the following Python libraries installe
 - [NumPy](http://www.numpy.org/)
 - [Pandas](http://pandas.pydata.org/)
 - [matplotlib](http://matplotlib.org/)
-- [scikit-learn](http://scikit-learn.org/stable/)
+- [scikit-learn 0.19.0](http://scikit-learn.org/stable/)
 - [scipy](https://www.scipy.org/)
 - [django](https://www.djangoproject.com/)
 - [python-socketio](http://python-socketio.readthedocs.io/en/latest/)
@@ -55,7 +55,7 @@ If you do not have Python installed yet, it is highly recommended that you insta
 
 ### Code
 
-Template code is provided in the `kaio/kaio.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `detect.csv` and `training.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
+Template code is provided in the `kaio/kaio.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `detect.csv`, `training.csv`, and `training_wo_outliers.csv` dataset file to complete your work.
 
 ### Run
 
@@ -99,6 +99,9 @@ python server.py
 ### Data
 
 The Kaio dataset consists of 4264 data points, with each datapoint having 5 features.
+
+- `training.csv` - Without preprocessing
+- `training_wo_outliers.csv` - With preprocessing where was removed outliers 
 
 **Features**
 
